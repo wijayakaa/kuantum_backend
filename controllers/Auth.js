@@ -1,4 +1,3 @@
-// controllers/Auth.js
 import User from "../model/UserModel.js";
 import argon2 from "argon2";
 

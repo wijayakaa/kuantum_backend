@@ -1,17 +1,32 @@
-// controllers/Product.js
 import Product from "../model/ProductModel.js";
-import User from "../model/UserModel.js";
 
 export const getProduct = async (req, res) => {
     try {
         const response = await Product.findAll({    
-            attributes: ["uuid", "name", "price"],
+            attributes: ["name", "price"],
         });
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
+// export const getProductById = async (req, res) => {
+//     try {
+//         const product = await Product.findOne({
+//             where: { uuid: req.params.id },
+//             attributes: ["name", "price"],
+//         });
+
+//         if (!product) {
+//             return res.status(404).json({ message: "Product not found" });
+//         }
+
+//         res.status(200).json(product);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// };
 
 export const createProduct = async (req, res) => {
     const { name, price } = req.body;
