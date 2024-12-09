@@ -13,20 +13,20 @@ export const getUsers = async (req, res) => {
 };
 
 export const getUserById = async (req, res) => {
-    try {
-        const user = await User.findOne({
-            where: { uuid: req.params.id },
-            attributes: ["uuid", "name", "email"]
-        });
+    // try {
+    //     const user = await User.findOne({
+    //         where: { uuid: req.params.id },
+    //         attributes: ["uuid", "name", "email"]
+    //     });
 
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
+    //     if (!user) {
+    //         return res.status(404).json({ message: "User not found" });
+    //     }
 
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    //     res.status(200).json(user);
+    // } catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 };
 
 export const createUser = async (req, res) => {
@@ -44,5 +44,5 @@ export const createUser = async (req, res) => {
     // } catch (error) {
     //     res.status(400).json({ message: error.message });
     // }
-    res.status(201).json({ message: "Nothing happened" });
+    res.status(201).json({ message: "Nothing happened, except you hacker!" });
 }
