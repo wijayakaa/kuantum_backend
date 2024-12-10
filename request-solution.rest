@@ -1,0 +1,30 @@
+###
+//Get All Soluton Options
+GET http://localhost:5000/solution
+
+### 
+//Create Soluton option (Admin Only)
+POST http://localhost:5000/solution
+Content-Type: application/json
+
+{
+  "title": "Enterprise Software Solution",
+  "desc": "Information overload is the new scourge in the IT world as everyone generates",
+  "icon": "<FiMonitor style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>"
+}
+
+
+### 
+//Edit Soluton option (Admin Only)
+PATCH http://localhost:5000/solution/ini id
+Content-Type: application/json
+
+{
+  "title": "Enterprise Software Solution",
+  "desc": "Information overload is the new scourge in the IT world as everyone generates",
+  "icon": "<FiMonitor style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>"
+}
+
+### 
+//Delete Soluton option (Admin Only)
+DELETE http://localhost:5000/solution/197defcf-832c-4151-91f3-a66aa48b7e1d

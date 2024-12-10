@@ -1,0 +1,28 @@
+###
+//Get All Choosen Options
+GET http://localhost:5000/choose-us
+
+### 
+//Create Choosen option (Admin Only)
+POST http://localhost:5000/choose-us
+Content-Type: application/json
+
+{
+  "title": "Long-Term Support and Maintenance",
+  "desc": "We provide comprehensive support services post-project to ensure your systems stay efficient and up-to-date."
+}
+
+
+### 
+//Edit Choosen option (Admin Only)
+PATCH http://localhost:5000/choose-us/ini id
+Content-Type: application/json
+
+{
+  "name": "Buah Kuldi",
+  "price": 192309213213
+}
+
+### 
+//Delete Choosen option (Admin Only)
+DELETE http://localhost:5000/choose-us/197defcf-832c-4151-91f3-a66aa48b7e1d
