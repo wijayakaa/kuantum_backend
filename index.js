@@ -8,6 +8,7 @@ import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
 import ChooseRoute from "./routes/ChooseRoute.js";
 import AuthRoute from "./routes/AuthRoute.js"; 
+import SolutionRoute from "./routes/SolutionRoute.js";
 
 dotenv.config();    
 
@@ -41,6 +42,7 @@ app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
 app.use(ChooseRoute);
+app.use(SolutionRoute);
 
 // store.sync();    
 

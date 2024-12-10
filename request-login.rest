@@ -1,0 +1,56 @@
+### 
+//Register User ADMIN
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name": "HEll Baratha Wijaya",
+  "email": "hell@gmail.com",
+  "password": "hell",
+  "confPassword" : "hell",
+  "role": "admin"
+}
+
+### 
+//Get All Users (Admin Only)
+GET http://localhost:5000/users
+
+
+### 
+//Update User (Admin Only)
+PATCH http://localhost:5000/users/20749727-bb89-4488-8c82-0c76c7ad46b9
+Content-Type: application/json
+
+{
+  "name": "Rizky Febrian",
+  "email": "mamaimaadminhere@gmail.com",
+  "password": "mamaadmin123456",
+  "confPassword" : "mamaadmin123456",
+  "role": "admin"
+}
+
+
+### 
+//Delete User (Admin Only)
+DELETE http://localhost:5000/users/30974753-dad7-4d8e-8aec-ca3bedb88736
+
+
+### 
+//Login Admin
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "email": "adm@gmail.com",
+  "password": "barath123456"
+}
+
+
+### 
+//Get Current User Info (Logged-in User)
+GET http://localhost:5000/me
+
+
+### 
+//Logout User
+DELETE http://localhost:5000/logout
