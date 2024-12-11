@@ -1,4 +1,4 @@
-import Solution from "../model/SolutionModel.js";
+import Solution from "../../model/home-model/SolutionModel.js";
 
 export const getSolution = async (req, res) => {
     try {

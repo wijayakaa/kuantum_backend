@@ -1,0 +1,30 @@
+###
+//Get All Soluton Options
+GET http://localhost:5000/web-development-process
+
+### 
+//Create Soluton option (Admin Only)
+POST http://localhost:5000/web-development-process
+Content-Type: application/json
+
+{
+  "icon": "<FiSettings style={{ height: '20px', width: '20px' }}/>" ,
+  "title": "Maintenance and Updates",
+  "desc": "Post-deployment, ongoing maintenance is crucial for the continued success of the web app. This phase involves monitoring performance, fixing any post-launch bugs, updating software, and adding new features based on user feedback. Regular updates help keep the app relevant, secure, and efficient in meeting users' changing expectations and needs."
+}
+
+
+### 
+//Edit Soluton option (Admin Only)
+PATCH http://localhost:5000/web-development-process/ini id
+Content-Type: application/json
+
+{
+  "title": "Enterprise Software Solution",
+  "desc": "Information overload is the new scourge in the IT world as everyone generates",
+  "icon": "<FiMonitor style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>"
+}
+
+### 
+//Delete Soluton option (Admin Only)
+DELETE http://localhost:5000/web-development-process/197defcf-832c-4151-91f3-a66aa48b7e1d

@@ -1,4 +1,4 @@
-import Choose from "../model/ChooseModel.js";
+import Choose from "../../model/home-model/ChooseModel.js";
 
 export const getChoosen = async (req, res) => {
     try {

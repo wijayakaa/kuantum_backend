@@ -6,10 +6,14 @@ import db from "./config/Database.js";
 import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
-import ChooseRoute from "./routes/ChooseRoute.js";
 import AuthRoute from "./routes/AuthRoute.js"; 
-import SolutionRoute from "./routes/SolutionRoute.js";
-import ServiceRoute from "./routes/ServiceRoute.js";
+import ChooseRoute from "./routes/home/ChooseRoute.js";
+import SolutionRoute from "./routes/home/SolutionRoute.js";
+import ServiceRoute from "./routes/home/ServiceRoute.js";
+import WebProcessRoute from "./routes/process/WebProcessRoute.js";
+import AppProcessRoute from "./routes/process/AppProcessRoute.js";
+import SiProcessRoute from "./routes/process/SiProcessRoute.js";
+
 
 dotenv.config();    
 
@@ -45,8 +49,11 @@ app.use(AuthRoute);
 app.use(ChooseRoute);
 app.use(SolutionRoute);
 app.use(ServiceRoute);
+app.use(WebProcessRoute);
+app.use(AppProcessRoute);
+app.use(SiProcessRoute);
 
-// store.sync();    
+// store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);

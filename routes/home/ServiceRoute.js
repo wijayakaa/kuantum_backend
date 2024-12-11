@@ -1,6 +1,6 @@
 import express from "express";
-import { getService,createService,updateService,deleteService} from "../controllers/Service.js"
-import { verifyAdmin } from "../middleware/AuthUser.js";
+import { getService,createService,updateService,deleteService} from "../../controllers/home/Service.js"
+import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 

@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
-import User from "./UserModel.js";
+import db from "../../config/Database.js";
+import User from "../UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Service = db.define("service",{
+const Solution = db.define("solution",{
     uuid : {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -34,13 +34,6 @@ const Service = db.define("service",{
         validate: {
             notEmpty: true,
         }
-    },    
-    url : {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
-        },
     },
     userId : {
         type: DataTypes.INTEGER,
@@ -53,7 +46,7 @@ const Service = db.define("service",{
     freezeTableName: true
 });
 
-User.hasMany(Service);
-Service.belongsTo(User, {foreignKey: "userId"});
+User.hasMany(Solution);
+Solution.belongsTo(User, {foreignKey: "userId"});
 
-export default Service;
+export default Solution;
