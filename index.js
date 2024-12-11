@@ -9,6 +9,7 @@ import ProductRoute from "./routes/ProductRoute.js";
 import ChooseRoute from "./routes/ChooseRoute.js";
 import AuthRoute from "./routes/AuthRoute.js"; 
 import SolutionRoute from "./routes/SolutionRoute.js";
+import ServiceRoute from "./routes/ServiceRoute.js";
 
 dotenv.config();    
 
@@ -43,6 +44,7 @@ app.use(ProductRoute);
 app.use(AuthRoute);
 app.use(ChooseRoute);
 app.use(SolutionRoute);
+app.use(ServiceRoute);
 
 // store.sync();    
 

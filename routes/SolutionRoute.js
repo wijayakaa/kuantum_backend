@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/solution", getSolution);
 router.post("/solution", verifyAdmin, createSolution);
-router.patch("/solution/:id", updateSolution);
+router.patch("/solution/:id", verifyAdmin,updateSolution);
 router.delete("/solution/:id", verifyAdmin, deleteSolution);
 
 export default router;

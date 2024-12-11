@@ -8,9 +8,9 @@ POST http://localhost:5000/solution
 Content-Type: application/json
 
 {
-  "title": "Enterprise Software Solution",
-  "desc": "Information overload is the new scourge in the IT world as everyone generates",
-  "icon": "<FiMonitor style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>"
+  "icon": "<FiDatabase style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>" ,
+  "title": "Big Data Analytic",
+  "desc": "The recent development and successes of enterprise analytics is heavily influenced by the growth of Artificial IntelligenceCapable of recognizing faces, objects, limited/emotional, detecting the same person at various angles and can be used during the day and night"
 }
 
 

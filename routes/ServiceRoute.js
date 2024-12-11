@@ -1,12 +1,12 @@
 import express from "express";
-// import { getSolution,createSolution,updateSolution,deleteSolution } from "../controllers/Solution.js";
+import { getService,createService,updateService,deleteService} from "../controllers/Service.js"
 import { verifyAdmin } from "../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/service", getSolution);
-router.post("/service", verifyAdmin, createSolution);
-router.patch("/service/:id", updateSolution);
-router.delete("/service/:id", verifyAdmin, deleteSolution);
+router.get("/service", getService);
+router.post("/service", verifyAdmin, createService);
+router.patch("/service/:id", verifyAdmin,updateService);
+router.delete("/service/:id", verifyAdmin, deleteService);
 
 export default router;
