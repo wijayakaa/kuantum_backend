@@ -14,8 +14,10 @@ POST http://localhost:5000/service
 Content-Type: application/json
 
 {
-  "name": "Buahahahaha",
-  "price": 10000
+  "title": "System Integrator",
+  "desc": "To improve UI and UX of a website or application to maximize user engagement your company.",
+  "icon": "<FiPenTool style={{ height: '48px', width: '48px',strokeWidth: '1' }}/>",
+  "url": "/system-integrator"
 }
 
 
@@ -25,8 +27,10 @@ PATCH http://localhost:5000/service/c3772418-1183-426c-9b68-ce833bd23f30
 Content-Type: application/json
 
 {
-  "name": "Buah Kuldi",
-  "price": 192309213213
+  "title": "Web App Development",
+  "desc": "Designing a good website that accommodates a lot of content is a tricky balancing act to pull off.",
+  "icon": "<FiAirplay style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>",
+  "url": "/web-app-development"
 }
 
 ### 

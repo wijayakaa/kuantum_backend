@@ -1,6 +1,6 @@
 import express from "express";
-import { getSolution,createSolution,updateSolution,deleteSolution } from "../controllers/Solution.js";
-import { verifyAdmin } from "../middleware/AuthUser.js";
+import { getSolution,createSolution,updateSolution,deleteSolution } from "../../controllers/home/Solution.js";
+import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 

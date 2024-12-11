@@ -1,9 +1,9 @@
-import Service from "../model/ServiceModel.js";
+import Service from "../../model/home-model/ServiceModel.js";
 
 export const getService = async (req, res) => {
     try {
-        const response = await Service.findAll({    
-            attributes: ["icon","title", "desc"],
+        const response = await Service.findAll({
+            attributes: ["title", "desc", "icon", "url"],
         });
         res.status(200).json(response);
     } catch (error) {
@@ -12,12 +12,13 @@ export const getService = async (req, res) => {
 };
 
 export const createService = async (req, res) => {
-    const { title, desc,icon } = req.body;
+    const { title, desc, icon, url } = req.body;
     try {
         await Service.create({
-            icon: icon, 
+            icon: icon,
             title: title,
             desc: desc,
+            url: url,
             userId: req.userId
         });
         res.status(201).json({ message: "Service option Created Successfully" });
@@ -33,12 +34,12 @@ export const updateService = async (req, res) => {
         });
 
         if (!service) return res.status(404).json({ message: "Service option not found" });
-        const { title, desc, icon } = req.body;
+        const { title, desc, icon, url } = req.body;
 
-        await Service.update({ title, desc,icon }, {
+        await Service.update({ title, desc, icon, url }, {
             where: { id: service.id }
         });
-        
+
         res.status(200).json({ message: "Service option updated successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -56,7 +57,7 @@ export const deleteService = async (req, res) => {
         await Service.destroy({
             where: { id: service.id }
         });
-        
+
         res.status(200).json({ message: "Service option deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });

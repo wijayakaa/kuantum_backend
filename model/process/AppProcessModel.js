@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
-import User from "./UserModel.js";
+import db from "../../config/Database.js";
+import User from "../UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Solution = db.define("solution",{
+const Process = db.define("app-process",{
     uuid : {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -46,7 +46,7 @@ const Solution = db.define("solution",{
     freezeTableName: true
 });
 
-User.hasMany(Solution);
-Solution.belongsTo(User, {foreignKey: "userId"});
+User.hasMany(Process);
+Process.belongsTo(User, {foreignKey: "userId"});
 
-export default Solution;
+export default Process;
