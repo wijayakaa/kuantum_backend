@@ -3,7 +3,7 @@ import Solution from "../model/SolutionModel.js";
 export const getSolution = async (req, res) => {
     try {
         const response = await Solution.findAll({    
-            attributes: ["title", "desc"],
+            attributes: ["icon","title", "desc"],
         });
         res.status(200).json(response);
     } catch (error) {
@@ -12,9 +12,10 @@ export const getSolution = async (req, res) => {
 };
 
 export const createSolution = async (req, res) => {
-    const { title, desc } = req.body;
+    const { title, desc,icon } = req.body;
     try {
         await Solution.create({
+            icon: icon, 
             title: title,
             desc: desc,
             userId: req.userId
@@ -32,9 +33,9 @@ export const updateSolution = async (req, res) => {
         });
 
         if (!solution) return res.status(404).json({ message: "Solution option not found" });
-        const { title, desc } = req.body;
+        const { title, desc, icon } = req.body;
 
-        await Solution.update({ title, desc }, {
+        await Solution.update({ title, desc,icon }, {
             where: { id: solution.id }
         });
         

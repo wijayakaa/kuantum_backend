@@ -28,12 +28,12 @@ const Solution = db.define("solution",{
             notEmpty: true,
         },
     },
-    icon : {
-        type: DataTypes.STRING,
+    icon: {
+        type: DataTypes.STRING, 
         allowNull: false,
-        validate:{
+        validate: {
             notEmpty: true,
-        },
+        }
     },
     userId : {
         type: DataTypes.INTEGER,
