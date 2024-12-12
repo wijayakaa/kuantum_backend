@@ -1,9 +1,9 @@
 ###
-//Get All Soluton Options
+//Get All Process Options
 GET http://localhost:5000/web-development-process
 
 ### 
-//Create Soluton option (Admin Only)
+//Create Process option (Admin Only)
 POST http://localhost:5000/web-development-process
 Content-Type: application/json
 
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 
 ### 
-//Edit Soluton option (Admin Only)
+//Edit Process option (Admin Only)
 PATCH http://localhost:5000/web-development-process/ini id
 Content-Type: application/json
 
@@ -26,5 +26,64 @@ Content-Type: application/json
 }
 
 ### 
-//Delete Soluton option (Admin Only)
+//Delete Process option (Admin Only)
 DELETE http://localhost:5000/web-development-process/197defcf-832c-4151-91f3-a66aa48b7e1d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Insert Prototype Development
+POST http://localhost:5000/si-development-process
+Content-Type: application/json
+
+{
+  "title": "Prototype Development and Testing",
+  "desc": "Before full implementation, a prototype is developed to test the feasibility of the solution. This testing process ensures that the designed solution can be implemented efficiently and without issues. It involves identifying and fixing any bugs or problems that may arise.",
+  "icon": "FiSlack"
+}
+
+### Insert System Implementation
+POST http://localhost:5000/si-development-process
+Content-Type: application/json
+
+{
+  "title": "System Implementation",
+  "desc": "After successful prototype testing, the integrator proceeds with full-scale implementation. This involves installing hardware, deploying software, and setting up networks and other system configurations. This process requires close coordination with the company's IT team and external vendors to ensure all components are integrated as planned.",
+  "icon": "FiSidebar"
+}
+
+### Insert Training and Knowledge Transfer
+POST http://localhost:5000/si-development-process
+Content-Type: application/json
+
+{
+  "title": "Training and Knowledge Transfer",
+  "desc": "To ensure users can effectively operate the new system, training and knowledge transfer are essential. The system integrator provides guides, manuals, and training sessions to company staff so they can manage the system smoothly and handle minor issues that may arise.",
+  "icon": "FiPenTool"
+}
+
+### Insert Maintenance and Technical Support
+POST http://localhost:5000/si-development-process
+Content-Type: application/json
+
+{
+  "title": "Maintenance and Technical Support",
+  "desc": "After integration, the final stage is ongoing maintenance and technical support. This includes monitoring system performance, software updates, system optimization, and problem resolution. This support ensures the system continues to function optimally and adapts to future technological advancements.",
+  "icon": "FiCheck"
+}

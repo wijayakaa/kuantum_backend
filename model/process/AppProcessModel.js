@@ -18,7 +18,6 @@ const Process = db.define("app-process",{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 100],
         },
     },
     desc : {

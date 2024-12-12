@@ -18,7 +18,6 @@ const Solution = db.define("solution",{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 100],
         },
     },
     desc : {

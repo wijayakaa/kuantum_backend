@@ -13,6 +13,7 @@ import ServiceRoute from "./routes/home/ServiceRoute.js";
 import WebProcessRoute from "./routes/process/WebProcessRoute.js";
 import AppProcessRoute from "./routes/process/AppProcessRoute.js";
 import SiProcessRoute from "./routes/process/SiProcessRoute.js";
+import ClientRoute from "./routes/home/ClientRoute.js";
 
 
 dotenv.config();    
@@ -52,6 +53,9 @@ app.use(ServiceRoute);
 app.use(WebProcessRoute);
 app.use(AppProcessRoute);
 app.use(SiProcessRoute);
+app.use(ClientRoute);
+app.use(ClientRoute);
+app.use('/uploads', express.static('public/uploads'));
 
 // store.sync();
 

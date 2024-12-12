@@ -4,48 +4,34 @@ import User from "../UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Process = db.define("system-integrator-process",{
-    uuid : {
+const Client = db.define("client", {
+    uuid: {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        validate:{
+        validate: {
             notEmpty: true,
         },
     },
-    title : {
+    title: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
-        },
-    },
-    desc : {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
-        },
-    },
-    icon: {
-        type: DataTypes.STRING, 
         allowNull: false,
         validate: {
             notEmpty: true,
-        }
-    },
-    userId : {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
         },
     },
-},{
+    logo: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    }
+}, {
     freezeTableName: true
 });
 
-User.hasMany(Process);
-Process.belongsTo(User, {foreignKey: "userId"});
+User.hasMany(Client);
+Client.belongsTo(User, { foreignKey: "userId" });
 
-export default Process;
+export default Client;
