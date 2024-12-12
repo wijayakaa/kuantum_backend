@@ -6,7 +6,7 @@ export const createClient = async (req, res) => {
     try {
         const { title } = req.body;
         const logoPath = req.file
-            ? `/uploads/clients/${req.file.filename}`
+            ? `/uploads/client/${req.file.filename}`
             : null;
 
         const client = await Client.create({
@@ -53,7 +53,7 @@ export const updateClient = async (req, res) => {
                 fs.removeSync(oldLogoPath);
             }
 
-            logoPath = `/uploads/clients/${req.file.filename}`;
+            logoPath = `/uploads/client/${req.file.filename}`;
         }
 
         await client.update({
@@ -99,7 +99,7 @@ export const deleteClient = async (req, res) => {
     }
 };
 
-export const getAllClients = async (req, res) => {
+export const getClients = async (req, res) => {
     try {
         const clients = await Client.findAll({
             attributes: ['title', 'logo']

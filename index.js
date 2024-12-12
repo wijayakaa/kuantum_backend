@@ -14,6 +14,10 @@ import WebProcessRoute from "./routes/process/WebProcessRoute.js";
 import AppProcessRoute from "./routes/process/AppProcessRoute.js";
 import SiProcessRoute from "./routes/process/SiProcessRoute.js";
 import ClientRoute from "./routes/home/ClientRoute.js";
+import SliderRoute from "./routes/home/SliderRoute.js";
+import AppTechnologiesRoute from "./routes/technologies/AppTechnologiesRoute.js";
+import SiTechnologiesRoute from "./routes/technologies/SiTechnologiesRoute.js";
+import WebTechnologiesRoute from "./routes/technologies/WebTechnologiesRoute.js";
 
 
 dotenv.config();    
@@ -26,9 +30,9 @@ const store = new sessionStore({
     db: db,
 });
 
-// (async()=>{
-//     await db.sync();
-// })();
+(async()=>{
+    await db.sync();
+})();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -44,6 +48,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use('/uploads', express.static('public/uploads'));
 app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
@@ -55,11 +60,13 @@ app.use(AppProcessRoute);
 app.use(SiProcessRoute);
 app.use(ClientRoute);
 app.use(ClientRoute);
-app.use('/uploads', express.static('public/uploads'));
+app.use(SliderRoute);
+app.use(AppTechnologiesRoute);
+app.use(SiTechnologiesRoute);
+app.use(WebTechnologiesRoute);
 
-// store.sync();
+store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);
 });
-
