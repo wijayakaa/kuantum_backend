@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
   "title": "Long-Term Support and Maintenance",
-  "desc": "We provide comprehensive support services post-project to ensure your systems stay efficient and up-to-date."
+  "desc": "We provide comprehensive support services post-project to ensure y our systems stay efficient and up-to-date."
 }
 
 
@@ -19,7 +19,7 @@ PATCH http://localhost:5000/choose-us/ini id
 Content-Type: application/json
 
 {
-  "name": "Buah Kuldi",
+  "title": "Buah Kuldi",
   "price": 192309213213
 }
 
