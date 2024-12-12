@@ -1,30 +1,30 @@
 ###
-//Get All Soluton Options
+//Get All Process Options
 GET http://localhost:5000/si-development-process
 
 ### 
-//Create Soluton option (Admin Only)
+//Create Process option (Admin Only)
 POST http://localhost:5000/si-development-process
 Content-Type: application/json
 
 {
-  "icon": "<FiSettings style={{ height: '20px', width: '20px' }}/>" ,
-  "title": "Maintenance and Updates",
-  "desc": "Post-deployment, ongoing maintenance is crucial for the continued success of the web app. This phase involves monitoring performance, fixing any post-launch bugs, updating software, and adding new features based on user feedback. Regular updates help keep the app relevant, secure, and efficient in meeting users' changing expectations and needs."
+    "title": "Integration Solution Design",
+    "desc": "Based on the initial analysis, the system integrator designs a solution that includes system architecture, technical specifications, and an integration strategy. This design outlines how various system components will be connected, communication protocols, and steps to ensure compatibility and performance.",
+    "icon": "<FiPieChart style={{ height: '20px', width: '20px' }}/>"
 }
 
 
 ### 
-//Edit Soluton option (Admin Only)
+//Edit Process option (Admin Only)
 PATCH http://localhost:5000/si-development-process/ini id
 Content-Type: application/json
 
 {
-  "title": "Enterprise Software Solution",
-  "desc": "Information overload is the new scourge in the IT world as everyone generates",
-  "icon": "<FiMonitor style={{ height: '48px', width: '48px', strokeWidth: '1' }}/>"
+  "title": "Integration Solution Design",
+  "desc": "Based on the initial analysis, the system integrator designs a solution that includes system architecture, technical specifications, and an integration strategy. This design outlines how various system components will be connected, communication protocols, and steps to ensure compatibility and performance.",
+  "icon": "<FiPieChart style={{ height: '20px', width: '20px' }}/>"
 }
 
 ### 
-//Delete Soluton option (Admin Only)
+//Delete Process option (Admin Only)
 DELETE http://localhost:5000/si-development-process/197defcf-832c-4151-91f3-a66aa48b7e1d

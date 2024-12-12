@@ -18,7 +18,6 @@ const Choose = db.define("choose",{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 100],
         },
     },
     desc : {

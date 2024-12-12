@@ -1,0 +1,28 @@
+###
+//Get All Choosen Options
+GET http://localhost:5000/clients
+
+### 
+//Create Choosen option (Admin Only)
+POST http://localhost:5000/clients
+Content-Type: application/json
+
+{
+  "title": "Long-Term Support and Maintenance",
+  "logo": ""
+}
+
+
+### 
+//Edit Choosen option (Admin Only)
+PATCH http://localhost:5000/clients/ini id
+Content-Type: application/json
+
+{
+  "name": "Buah Kuldi",
+  "logo": ""
+}
+
+### 
+//Delete Choosen option (Admin Only)
+DELETE http://localhost:5000/clients/197defcf-832c-4151-91f3-a66aa48b7e1d
