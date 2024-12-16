@@ -19,14 +19,14 @@ export const getSlider = async (req, res) => {
 export const createSlider = async (req, res) => {
     try {
         const { title, desc } = req.body;
-        const imaagePath = req.file
+        const imagePath = req.file
             ? `/uploads/slider/${req.file.filename}`
             : null;
 
         const slider = await Slider.create({
             title,
             desc,
-            image: imaagePath,
+            image: imagePath,
             userId: req.userId
         });
 
