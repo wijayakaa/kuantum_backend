@@ -5,9 +5,9 @@ import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/app-technologies", getTechnologies);
-router.post("/app-technologies", verifyAdmin, uploadSiTechnologies.single("logo"), validateFileType, createTechnologies);
-router.patch("/app-technologies/:id", verifyAdmin, uploadSiTechnologies.single("logo"), validateFileType, updateTechnologies);
-router.delete("/app-technologies/:id", verifyAdmin, deleteTechnologies);
+router.get("/si-technologies", getTechnologies);
+router.post("/si-technologies", verifyAdmin, uploadSiTechnologies.single("logo"), validateFileType, createTechnologies);
+router.patch("/si-technologies/:id", verifyAdmin, uploadSiTechnologies.single("logo"), validateFileType, updateTechnologies);
+router.delete("/si-technologies/:id", verifyAdmin, deleteTechnologies);
 
 export default router;

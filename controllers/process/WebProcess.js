@@ -3,7 +3,7 @@ import Process from "../../model/process/WebProcessModel.js";
 export const getProcess = async (req, res) => {
     try {
         const response = await Process.findAll({
-            attributes: ["title", "desc", "icon"],
+            attributes: ['uuid',"title", "desc", "icon"],
         });
         res.status(200).json(response);
     } catch (error) {

@@ -18,6 +18,7 @@ import SliderRoute from "./routes/home/SliderRoute.js";
 import AppTechnologiesRoute from "./routes/technologies/AppTechnologiesRoute.js";
 import SiTechnologiesRoute from "./routes/technologies/SiTechnologiesRoute.js";
 import WebTechnologiesRoute from "./routes/technologies/WebTechnologiesRoute.js";
+import ExperienceRoute from "./routes/ExperienceRoute.js";
 
 
 dotenv.config();    
@@ -30,9 +31,9 @@ const store = new sessionStore({
     db: db,
 });
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -64,8 +65,9 @@ app.use(SliderRoute);
 app.use(AppTechnologiesRoute);
 app.use(SiTechnologiesRoute);
 app.use(WebTechnologiesRoute);
+app.use(ExperienceRoute);
 
-store.sync();
+// store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);
