@@ -2,6 +2,20 @@ import Client from "../../model/home-model/ClientModel.js";
 import fs from 'fs-extra';
 import path from 'path';
 
+export const getClients = async (req, res) => {
+    try {
+        const clients = await Client.findAll({
+            attributes: ['title', 'logo']
+        });
+        res.status(200).json(clients);
+    } catch (error) {
+        res.status(500).json({
+            message: "Error fetching clients",
+            error: error.message
+        });
+    }
+};
+
 export const createClient = async (req, res) => {
     try {
         const { title } = req.body;
@@ -94,20 +108,6 @@ export const deleteClient = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "Error deleting client",
-            error: error.message
-        });
-    }
-};
-
-export const getClients = async (req, res) => {
-    try {
-        const clients = await Client.findAll({
-            attributes: ['title', 'logo']
-        });
-        res.status(200).json(clients);
-    } catch (error) {
-        res.status(500).json({
-            message: "Error fetching clients",
             error: error.message
         });
     }

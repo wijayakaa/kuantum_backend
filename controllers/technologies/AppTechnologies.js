@@ -2,6 +2,20 @@ import Technologies from "../../model/technologies/AppTechnologiesModel.js";
 import fs from 'fs-extra';
 import path from 'path';
 
+export const getTechnologies = async (req, res) => {
+    try {
+        const technologies = await Technologies.findAll({
+            attributes: ['uuid','title', 'logo']
+        });
+        res.status(200).json(technologies);
+    } catch (error) {
+        res.status(500).json({
+            message: "Error fetching technologies option",
+            error: error.message
+        });
+    }
+};
+
 export const createTechnologies = async (req, res) => {
     try {
         const { title } = req.body;
@@ -94,20 +108,6 @@ export const deleteTechnologies = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "Error deleting technologies option",
-            error: error.message
-        });
-    }
-};
-
-export const getTechnologies = async (req, res) => {
-    try {
-        const technologies = await Technologies.findAll({
-            attributes: ['title', 'logo']
-        });
-        res.status(200).json(technologies);
-    } catch (error) {
-        res.status(500).json({
-            message: "Error fetching technologies option",
             error: error.message
         });
     }

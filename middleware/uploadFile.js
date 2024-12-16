@@ -1,4 +1,3 @@
-// middleware/uploadFile.js
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs-extra';
@@ -41,7 +40,7 @@ const createUploadMiddleware = (subFolder) => {
         limits: {
             fileSize: 5 * 1024 * 1024 
         }
-    });
+    })
 };
 
 export const uploadClient = createUploadMiddleware('client');
@@ -49,6 +48,8 @@ export const uploadSlider = createUploadMiddleware('slider');
 export const uploadWebTechnologies = createUploadMiddleware('web-technologies');
 export const uploadSiTechnologies = createUploadMiddleware('si-technologies');
 export const uploadAppTechnologies = createUploadMiddleware('app-technologies');
+export const uploadExperience = createUploadMiddleware('experience');
+
 
 export const validateFileType = async (req, res, next) => {
     if (!req.file) {
