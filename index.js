@@ -19,6 +19,7 @@ import AppTechnologiesRoute from "./routes/technologies/AppTechnologiesRoute.js"
 import SiTechnologiesRoute from "./routes/technologies/SiTechnologiesRoute.js";
 import WebTechnologiesRoute from "./routes/technologies/WebTechnologiesRoute.js";
 import ExperienceRoute from "./routes/ExperienceRoute.js";
+import CareerRoute from "./routes/CareerRoute.js";
 
 
 dotenv.config();    
@@ -53,7 +54,7 @@ app.use('/uploads', express.static('public/uploads'));
 app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
-app.use(ChooseRoute);
+app.use(ChooseRoute);   
 app.use(SolutionRoute);
 app.use(ServiceRoute);
 app.use(WebProcessRoute);
@@ -66,6 +67,7 @@ app.use(AppTechnologiesRoute);
 app.use(SiTechnologiesRoute);
 app.use(WebTechnologiesRoute);
 app.use(ExperienceRoute);
+app.use(CareerRoute);
 
 // store.sync();
 
