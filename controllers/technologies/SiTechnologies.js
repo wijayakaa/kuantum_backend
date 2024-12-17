@@ -20,7 +20,7 @@ export const createTechnologies = async (req, res) => {
     try {
         const { title } = req.body;
         const logoPath = req.file
-            ? `/uploads/technologies/${req.file.filename}`
+            ? `/uploads/si-technologies/${req.file.filename}`
             : null;
 
         const technologies = await Technologies.create({
@@ -67,7 +67,7 @@ export const updateTechnologies = async (req, res) => {
                 fs.removeSync(oldLogoPath);technologies
             }
 
-            logoPath = `/uploads/technologies/${req.file.filename}`;
+            logoPath = `/uploads/si-technologies/${req.file.filename}`;
         }
 
         await technologies.update({

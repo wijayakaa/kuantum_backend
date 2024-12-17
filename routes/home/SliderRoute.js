@@ -10,4 +10,4 @@ router.post("/slider", verifyAdmin, uploadSlider.single("image"), validateFileTy
 router.patch("/slider/:id", verifyAdmin, uploadSlider.single("image"), validateFileType,updateSlider )
 router.delete("/slider/:id", verifyAdmin,deleteSlider );
 
-export default router;
+export default router;  
