@@ -5,7 +5,17 @@ import path from 'path';
 export const getCareer = async (req, res) => {
     try {
         const career = await Career.findAll({
-            attributes: ['uuid', 'name', 'posted_at', 'message', "city", "type", "work_at", "list_messages", "icon"]
+            attributes: [
+                'uuid', 
+                'name', 
+                'posted_at', 
+                'message', 
+                'city', 
+                'type', 
+                'work_at', 
+                'icon', 
+                'list_messages'
+            ]
         });
         res.status(200).json(career);
     } catch (error) {

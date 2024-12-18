@@ -57,25 +57,36 @@ const Career = db.define("career", {
         },
     },
     list_messages: {
-        type: DataTypes.JSON,
+        type: DataTypes.TEXT, 
         allowNull: false,
         validate: {
             notEmpty: true,
             isValidListMessages(value) {
-                if (!Array.isArray(value)) {
-                    throw new Error('list_messages harus berupa array');
-                }
-                if (value.length < 1 || value.length > 10) {
-                    throw new Error('list_messages harus memiliki 1-10 item');
-                }
-                value.forEach(item => {
-                    if (typeof item !== 'string' || item.trim().length === 0) {
-                        throw new Error('Setiap item dalam list_messages harus berupa string dan tidak boleh kosong');
+                try {
+                    const parsed = JSON.parse(value);
+                    if (!Array.isArray(parsed)) {
+                        throw new Error('list_messages harus berupa array');
                     }
-                });
+                    if (parsed.length < 1 || parsed.length > 10) {
+                        throw new Error('list_messages harus memiliki 1-10 item');
+                    }
+                    parsed.forEach(item => {
+                        if (typeof item !== 'string' || item.trim().length === 0) {
+                            throw new Error('Setiap item dalam list_messages harus berupa string dan tidak boleh kosong');
+                        }
+                    });
+                } catch (e) {
+                    throw new Error('Invalid JSON format for list_messages');
+                }
             }
         },
-        defaultValue: [],
+        get() {
+            const rawValue = this.getDataValue('list_messages');
+            return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(value) {
+            this.setDataValue('list_messages', JSON.stringify(value));
+        }
     },
     icon: {
         type: DataTypes.STRING,
