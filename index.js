@@ -32,9 +32,9 @@ const store = new sessionStore({
     db: db,
 });
 
-// (async()=>{
-//     await db.sync();
-// })();
+(async()=>{
+    await db.sync();
+})();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -44,15 +44,15 @@ app.use(session({
     cookie: { secure: 'auto' }
 }));
 
-app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
-}));
-
 // app.use(cors({
 //     credentials: true,
-//     origin: 'http://localhost:3001'
+//     origin: 'http://localhost:3000'
 // }));
+
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3001'
+}));
 
 app.use(express.json());
 app.use('/uploads', express.static('public/uploads'));
@@ -74,7 +74,7 @@ app.use(WebTechnologiesRoute);
 app.use(ExperienceRoute);
 app.use(CareerRoute);
 
-// store.sync();
+store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);
