@@ -20,6 +20,9 @@ import SiTechnologiesRoute from "./routes/technologies/SiTechnologiesRoute.js";
 import WebTechnologiesRoute from "./routes/technologies/WebTechnologiesRoute.js";
 import ExperienceRoute from "./routes/ExperienceRoute.js";
 import CareerRoute from "./routes/CareerRoute.js";
+import AppDevelopmentModelDescRoute from "./routes/service-development/AppDevelopmentModelDescRoute.js";
+import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopmentModelDescRoute.js";
+import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
 
 
 dotenv.config();    
@@ -32,9 +35,9 @@ const store = new sessionStore({
     db: db,
 });
 
-(async()=>{
-    await db.sync();
-})();
+    (async()=>{
+        await db.sync();
+    })();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -73,6 +76,9 @@ app.use(SiTechnologiesRoute);
 app.use(WebTechnologiesRoute);
 app.use(ExperienceRoute);
 app.use(CareerRoute);
+app.use(AppDevelopmentModelDescRoute);
+app.use(SiDevelopmentModelDescRoute);   
+app.use(WebAppDevelopmentModelDescRoute);
 
 store.sync();
 

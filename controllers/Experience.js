@@ -33,10 +33,10 @@ export const createExperience = async (req, res) => {
         res.status(201).json({
             message: "Experience created successfully",
             experience: {
+                image: experience.image,
                 uuid: experience.uuid,
                 title: experience.title,
                 desc: experience.desc,
-                image: experience.image
             }
         });
     } catch (error) {
@@ -81,10 +81,10 @@ export const updateExperience = async (req, res) => {
         res.status(200).json({
             message: "Experience updated successfully",
             experience: {
+                image: experience.loimagego,
                 id: experience.uuid,
                 title: experience.title,
                 desc: experience.desc,
-                image: experience.loimagego
             }
         });
     } catch (error) {

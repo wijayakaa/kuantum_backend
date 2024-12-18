@@ -14,7 +14,7 @@ const Slider = db.define("slider", {
         },
     },
     title: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             notEmpty: true,
