@@ -55,6 +55,7 @@ export const uploadAppSliderInformation = createUploadMiddleware('app-slider-inf
 export const uploadWebSliderInformation = createUploadMiddleware('web-slider-information');
 export const uploadSiSliderInformation = createUploadMiddleware('si-slider-information');
 export const uploadExperienceSliderInformation = createUploadMiddleware('experience-slider-information');
+export const uploadCareerSliderInformation = createUploadMiddleware('career-slider-information');
 
 
 export const validateFileType = async (req, res, next) => {

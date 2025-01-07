@@ -23,17 +23,15 @@ import CareerRoute from "./routes/CareerRoute.js";
 import AppDevelopmentModelDescRoute from "./routes/service-development/AppDevelopmentModelDescRoute.js";
 import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopmentModelDescRoute.js";
 import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
+import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
+// import CareerDescRoute from "./routes/CareerDescRoute.js";
 
 
 dotenv.config();
 
 const app = express();
-
 const sessionStore = new SequelizeStore(session.Store);
-
-const store = new sessionStore({
-    db: db,
-});
+const store = new sessionStore({ db: db });
 
 // (async()=>{
 //     await db.sync();
@@ -79,6 +77,9 @@ app.use(CareerRoute);
 app.use(AppDevelopmentModelDescRoute);
 app.use(SiDevelopmentModelDescRoute);
 app.use(WebAppDevelopmentModelDescRoute);
+app.use(ExperienceDescRoute);
+// app.use(CareerDescRoute);
+
 
 // store.sync();
 
