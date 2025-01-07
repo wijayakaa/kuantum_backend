@@ -3,7 +3,7 @@ import Service from "../../model/home-model/ServiceModel.js";
 export const getService = async (req, res) => {
     try {
         const response = await Service.findAll({
-            attributes: ["title", "desc", "icon", "url"],
+            attributes: ["uuid","title", "desc", "icon", "url"],
         });
         res.status(200).json(response);
     } catch (error) {

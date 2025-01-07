@@ -3,7 +3,7 @@ import Solution from "../../model/home-model/SolutionModel.js";
 export const getSolution = async (req, res) => {
     try {
         const response = await Solution.findAll({    
-            attributes: ["icon","title", "desc"],
+            attributes: ['uuid',"icon","title", "desc"],
         });
         res.status(200).json(response);
     } catch (error) {
