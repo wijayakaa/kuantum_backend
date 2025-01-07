@@ -5,7 +5,7 @@ import path from 'path';
 export const getClients = async (req, res) => {
     try {
         const clients = await Client.findAll({
-            attributes: ['title', 'logo']
+            attributes: ['uuid', 'title', 'logo']
         });
         res.status(200).json(clients);
     } catch (error) {
@@ -55,7 +55,10 @@ export const updateClient = async (req, res) => {
         const { id } = req.params;
         const { title } = req.body;
 
-        const client = await Client.findOne({ where: { uuid: id } });
+        const client = await Client.findOne({ 
+            where: { uuid: id } 
+        });
+        
         if (!client) {
             return res.status(404).json({ message: "Client not found" });
         }

@@ -13,6 +13,13 @@ const Desc = db.define("experience-desc", {
             notEmpty: true,
         },
     },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
     desc: {
         type: DataTypes.TEXT, 
         allowNull: false,
@@ -37,6 +44,13 @@ const Desc = db.define("experience-desc", {
                 }
             }
         }
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
     },
     userId: {
         type: DataTypes.INTEGER,

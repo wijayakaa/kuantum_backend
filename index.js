@@ -6,7 +6,7 @@ import db from "./config/Database.js";
 import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
-import AuthRoute from "./routes/AuthRoute.js"; 
+import AuthRoute from "./routes/AuthRoute.js";
 import ChooseRoute from "./routes/home/ChooseRoute.js";
 import SolutionRoute from "./routes/home/SolutionRoute.js";
 import ServiceRoute from "./routes/home/ServiceRoute.js";
@@ -25,7 +25,7 @@ import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopm
 import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
 
 
-dotenv.config();    
+dotenv.config();
 
 const app = express();
 
@@ -35,9 +35,9 @@ const store = new sessionStore({
     db: db,
 });
 
-    (async()=>{
-        await db.sync();
-    })();
+// (async()=>{
+//     await db.sync();
+// })();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -62,7 +62,7 @@ app.use('/uploads', express.static('public/uploads'));
 app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
-app.use(ChooseRoute);   
+app.use(ChooseRoute);
 app.use(SolutionRoute);
 app.use(ServiceRoute);
 app.use(WebProcessRoute);
@@ -77,10 +77,10 @@ app.use(WebTechnologiesRoute);
 app.use(ExperienceRoute);
 app.use(CareerRoute);
 app.use(AppDevelopmentModelDescRoute);
-app.use(SiDevelopmentModelDescRoute);   
+app.use(SiDevelopmentModelDescRoute);
 app.use(WebAppDevelopmentModelDescRoute);
 
-store.sync();
+// store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);

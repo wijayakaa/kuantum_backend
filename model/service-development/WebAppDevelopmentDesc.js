@@ -4,17 +4,24 @@ import User from "./../UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Desc = db.define("web-development-desc",{
-    uuid : { 
+const Desc = db.define("web-development-desc", {
+    uuid: {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        validate:{
+        validate: {
+            notEmpty: true,
+        },
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
             notEmpty: true,
         },
     },
     desc: {
-        type: DataTypes.TEXT, 
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             notEmpty: true,
@@ -38,18 +45,25 @@ const Desc = db.define("web-development-desc",{
             }
         }
     },
-    userId : {
-        type: DataTypes.INTEGER,
+    image: {
+        type: DataTypes.STRING,
         allowNull: false,
-        validate:{
+        validate: {
             notEmpty: true,
         },
     },
-},{
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
+}, {
     freezeTableName: true
 });
 
 User.hasMany(Desc);
-Desc.belongsTo(User, {foreignKey: "userId"});
+Desc.belongsTo(User, { foreignKey: "userId" });
 
 export default Desc;

@@ -3,7 +3,7 @@ import Choose from "../../model/home-model/ChooseModel.js";
 export const getChoosen = async (req, res) => {
     try {
         const response = await Choose.findAll({    
-            attributes: ["title", "desc"],
+            attributes: ["uuid","title", "desc"],
         });
         res.status(200).json(response);
     } catch (error) {

@@ -4,7 +4,7 @@ import User from "../UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Process = db.define("app-process",{
+const Process = db.define("web-process",{
     uuid : {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,

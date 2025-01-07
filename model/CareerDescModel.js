@@ -5,7 +5,7 @@ import User from "./../UserModel.js";
 const { DataTypes } = Sequelize;
 
 const Desc = db.define("career-desc", {
-    uuid: { 
+    uuid: {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -13,8 +13,15 @@ const Desc = db.define("career-desc", {
             notEmpty: true,
         },
     },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
     desc: {
-        type: DataTypes.TEXT, 
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             notEmpty: true,
@@ -45,11 +52,18 @@ const Desc = db.define("career-desc", {
             notEmpty: true,
         },
     },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
 }, {
     freezeTableName: true
 });
 
 User.hasMany(Desc);
-Desc.belongsTo(User, {foreignKey: "userId"});
+Desc.belongsTo(User, { foreignKey: "userId" });
 
 export default Desc;
