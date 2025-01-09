@@ -5,7 +5,7 @@ import path from 'path';
 export const getExperience = async (req, res) => {
     try {
         const experience = await Experience.findAll({
-            attributes: ['uuid','desc', 'title', 'image']
+            attributes: ['uuid','title', 'desc', 'image']
         });
         res.status(200).json(experience);
     } catch (error) {

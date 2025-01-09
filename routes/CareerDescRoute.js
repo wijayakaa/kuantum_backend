@@ -1,6 +1,6 @@
 import express from "express";
 import {  getDesc, createDesc, updateDesc, deleteDesc } from "../controllers/CareerDesc.js";
-import { uploadCareerSliderInformation, uploadCareerSliderInformation, validateFileType } from "../middleware/uploadFile.js";
+import { uploadCareerSliderInformation, validateFileType } from "../middleware/uploadFile.js";
 import { verifyAdmin } from "../middleware/AuthUser.js";
 
 const router = express.Router();
