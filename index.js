@@ -24,7 +24,7 @@ import AppDevelopmentModelDescRoute from "./routes/service-development/AppDevelo
 import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopmentModelDescRoute.js";
 import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
 import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
-// import CareerDescRoute from "./routes/CareerDescRoute.js";
+import CareerDescRoute from "./routes/CareerDescRoute.js";
 
 
 dotenv.config();
@@ -45,15 +45,15 @@ app.use(session({
     cookie: { secure: 'auto' }
 }));
 
-// app.use(cors({
-//     credentials: true,
-//     origin: 'http://localhost:3000'
-// }));
-
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3001'
+    origin: 'http://localhost:3000'
 }));
+
+// app.use(cors({
+//     credentials: true,
+//     origin: 'http://localhost:3001'
+// }));
 
 app.use(express.json());
 app.use('/uploads', express.static('public/uploads'));
@@ -78,7 +78,7 @@ app.use(AppDevelopmentModelDescRoute);
 app.use(SiDevelopmentModelDescRoute);
 app.use(WebAppDevelopmentModelDescRoute);
 app.use(ExperienceDescRoute);
-// app.use(CareerDescRoute);
+app.use(CareerDescRoute);
 
 
 // store.sync();
