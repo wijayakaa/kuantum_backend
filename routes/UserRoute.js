@@ -5,7 +5,7 @@ import { verifyAdmin } from "../middleware/AuthUser.js";
 const router = express.Router();
 
 router.get("/users", verifyAdmin, getUsers);
-// router.get("/users/:id", verifyAdmin, getUserById);
+router.get("/users/:id", verifyAdmin, getUserById);
 router.post("/users", verifyAdmin,createUser);
 
 export default router;
