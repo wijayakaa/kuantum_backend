@@ -1,4 +1,6 @@
 import Desc from "../model/CareerDescModel.js";
+import fs from 'fs-extra';
+import path from 'path';
 
 export const getDesc = async (req, res) => {
     try {
@@ -145,7 +147,7 @@ export const updateDesc = async (req, res) => {
                 const oldImagePath = path.join(process.cwd(), 'public', description.image);
                 await fs.remove(oldImagePath);
             }
-            imagePath = `/uploads/career-slider-informationn/${req.file.filename}`;
+            imagePath = `/uploads/career-slider-information/${req.file.filename}`;
         }
 
         await Desc.update(
