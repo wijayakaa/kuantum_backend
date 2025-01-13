@@ -3,7 +3,7 @@ import Service from "../../model/home-model/ServiceModel.js";
 export const getService = async (req, res) => {
     try {
         const response = await Service.findAll({
-            attributes: ["uuid","title", "desc", "icon", "url"],
+            attributes: ["uuid","title", "desc", "icon"],
         });
         res.status(200).json(response);
     } catch (error) {
@@ -12,13 +12,12 @@ export const getService = async (req, res) => {
 };
 
 export const createService = async (req, res) => {
-    const { title, desc, icon, url } = req.body;
+    const { title, desc, icon } = req.body;
     try {
         await Service.create({
             icon: icon,
             title: title,
             desc: desc,
-            url: url,
             userId: req.userId
         });
         res.status(201).json({ message: "Service option Created Successfully" });
@@ -34,9 +33,9 @@ export const updateService = async (req, res) => {
         });
 
         if (!service) return res.status(404).json({ message: "Service option not found" });
-        const { title, desc, icon, url } = req.body;
+        const { title, desc, icon,  } = req.body;
 
-        await Service.update({ title, desc, icon, url }, {
+        await Service.update({ title, desc, icon,  }, {
             where: { id: service.id }
         });
 
