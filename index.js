@@ -25,6 +25,7 @@ import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopm
 import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
 import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
 import CareerDescRoute from "./routes/CareerDescRoute.js";
+import FooterRoute from "./routes/FooterRoute.js";
 
 
 dotenv.config();
@@ -33,9 +34,9 @@ const app = express();
 const sessionStore = new SequelizeStore(session.Store);
 const store = new sessionStore({ db: db });
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -50,7 +51,6 @@ app.use(cors({
     origin: 'http://localhost:3000',
     // origin: 'http://localhost:3001',
 }));
-
 
 app.use(express.json());
 app.use('/uploads', express.static('public/uploads'));
@@ -76,9 +76,9 @@ app.use(SiDevelopmentModelDescRoute);
 app.use(WebAppDevelopmentModelDescRoute);
 app.use(ExperienceDescRoute);
 app.use(CareerDescRoute);
+app.use(FooterRoute);
 
-
-store.sync();
+// store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);
