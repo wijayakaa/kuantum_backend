@@ -1,5 +1,24 @@
 import Footer from "../model/FooterModel.js";
 
+// Validation helper functions
+const validateStructure = (data) => {
+    return data.every(item => {
+        const hasRequiredProps = 
+            typeof item === 'object' &&
+            item !== null &&
+            'value' in item &&
+            'icon' in item &&
+            'category' in item;
+            
+        const hasValidTypes =
+            typeof item.value === 'string' &&
+            typeof item.icon === 'string' &&
+            typeof item.category === 'string';
+            
+        return hasRequiredProps && hasValidTypes;
+    });
+};
+
 export const getFooter = async (req, res) => {
     try {
         const response = await Footer.findAll({
@@ -14,37 +33,21 @@ export const getFooter = async (req, res) => {
 export const createFooter = async (req, res) => {
     const { location, contact, social_media } = req.body;
     try {
-        // Memastikan contact dan social_media adalah array
+        // Ensure arrays and handle single items
         const contactArray = Array.isArray(contact) ? contact : [contact];
         const socialMediaArray = Array.isArray(social_media) ? social_media : [social_media];
 
-        // Memvalidasi struktur data contact
-        const validateContact = (data) => {
-            return data.every(item => {
-                return typeof item === 'object' && 
-                       item.hasOwnProperty('number') && 
-                       item.hasOwnProperty('icon');
-            });
-        };
-
-        // Memvalidasi struktur data social media
-        const validateSocialMedia = (data) => {
-            return data.every(item => {
-                return typeof item === 'object' && 
-                       item.hasOwnProperty('instagram') && 
-                       item.hasOwnProperty('icon');
-            });
-        };
-
-        if (!validateContact(contactArray)) {
-            return res.status(400).json({ 
-                message: "Invalid data structure for contact. Each contact must have 'number' and 'icon' properties" 
+        // Validate contact structure
+        if (!validateStructure(contactArray)) {
+            return res.status(400).json({
+                message: "Invalid contact structure. Each contact must have string 'value', 'icon', and 'category' properties"
             });
         }
 
-        if (!validateSocialMedia(socialMediaArray)) {
-            return res.status(400).json({ 
-                message: "Invalid data structure for social_media. Each social media must have 'instagram' and 'icon' properties" 
+        // Validate social_media structure
+        if (!validateStructure(socialMediaArray)) {
+            return res.status(400).json({
+                message: "Invalid social_media structure. Each social media must have string 'value', 'icon', and 'category' properties"
             });
         }
 
@@ -55,7 +58,7 @@ export const createFooter = async (req, res) => {
             userId: req.userId
         });
 
-        res.status(201).json({ message: "Footer option Created Successfully" });
+        res.status(201).json({ message: "Footer created successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -67,41 +70,27 @@ export const updateFooter = async (req, res) => {
             where: { uuid: req.params.id }
         });
 
-        if (!footer) return res.status(404).json({ message: "Footer option not found" });
-        
+        if (!footer) {
+            return res.status(404).json({ message: "Footer not found" });
+        }
+
         const { location, contact, social_media } = req.body;
-        
-        // Memastikan contact dan social_media adalah array
+
+        // Ensure arrays and handle single items
         const contactArray = Array.isArray(contact) ? contact : [contact];
         const socialMediaArray = Array.isArray(social_media) ? social_media : [social_media];
 
-        // Memvalidasi struktur data contact
-        const validateContact = (data) => {
-            return data.every(item => {
-                return typeof item === 'object' && 
-                       item.hasOwnProperty('number') && 
-                       item.hasOwnProperty('icon');
-            });
-        };
-
-        // Memvalidasi struktur data social media
-        const validateSocialMedia = (data) => {
-            return data.every(item => {
-                return typeof item === 'object' && 
-                       item.hasOwnProperty('instagram') && 
-                       item.hasOwnProperty('icon');
-            });
-        };
-
-        if (!validateContact(contactArray)) {
-            return res.status(400).json({ 
-                message: "Invalid data structure for contact. Each contact must have 'number' and 'icon' properties" 
+        // Validate contact structure
+        if (!validateStructure(contactArray)) {
+            return res.status(400).json({
+                message: "Invalid contact structure. Each contact must have string 'value', 'icon', and 'category' properties"
             });
         }
 
-        if (!validateSocialMedia(socialMediaArray)) {
-            return res.status(400).json({ 
-                message: "Invalid data structure for social_media. Each social media must have 'instagram' and 'icon' properties" 
+        // Validate social_media structure
+        if (!validateStructure(socialMediaArray)) {
+            return res.status(400).json({
+                message: "Invalid social_media structure. Each social media must have string 'value', 'icon', and 'category' properties"
             });
         }
 
@@ -113,7 +102,7 @@ export const updateFooter = async (req, res) => {
             where: { id: footer.id }
         });
 
-        res.status(200).json({ message: "Footer option updated successfully" });
+        res.status(200).json({ message: "Footer updated successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -125,13 +114,15 @@ export const deleteFooter = async (req, res) => {
             where: { uuid: req.params.id }
         });
 
-        if (!footer) return res.status(404).json({ message: "Footer option not found" });
+        if (!footer) {
+            return res.status(404).json({ message: "Footer not found" });
+        }
 
         await Footer.destroy({
             where: { id: footer.id }
         });
 
-        res.status(200).json({ message: "Footer option deleted successfully" });
+        res.status(200).json({ message: "Footer deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
