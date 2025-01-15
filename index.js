@@ -27,7 +27,6 @@ import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
 import CareerDescRoute from "./routes/CareerDescRoute.js";
 import FooterRoute from "./routes/FooterRoute.js";
 
-
 dotenv.config();
 
 const app = express();
