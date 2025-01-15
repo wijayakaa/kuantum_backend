@@ -33,9 +33,9 @@ const app = express();
 const sessionStore = new SequelizeStore(session.Store);
 const store = new sessionStore({ db: db });
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -77,7 +77,7 @@ app.use(ExperienceDescRoute);
 app.use(CareerDescRoute);
 app.use(FooterRoute);
 
-store.sync();
+// store.sync();
 
 app.listen(process.env.app_port, () => {
     console.log(`Server is running on port ${process.env.app_port}`);
