@@ -79,6 +79,7 @@ app.use(FooterRoute);
 
 // store.sync();
 
-app.listen(process.env.app_port, () => {
-    console.log(`Server is running on port ${process.env.app_port}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
