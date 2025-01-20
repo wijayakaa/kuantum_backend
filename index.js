@@ -32,26 +32,56 @@ import FooterRoute from "./routes/FooterRoute.js";
 dotenv.config();
 
 const app = express();
-const store = new SequelizeStore({
-    db: db, 
-  })
+// const store = new SequelizeStore({
+//     db: db, 
+//   })
+
+// const SequelizeStore = sessionSequelize(session.Store);
+const sessionStore = new SequelizeStore({
+    db: db,
+    tableName: 'sessions',
+    checkExpirationInterval: 15 * 60 * 1000, // Check every 15 minutes
+    expiration: 24 * 60 * 60 * 1000 // Expire after 24 hours
+});
 
 // (async()=>{
 //     await db.sync();
 // })();
 
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: store,
+//     cookie: { secure: 'auto' }
+// }));
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    key: 'connect.sid',
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
+    store: sessionStore,
     resave: false,
-    saveUninitialized: true,
-    store: store,
-    cookie: { secure: 'auto' }
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    }
 }));
+
+// app.use(cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000',
+//     // origin: 'http://localhost:3001',
+// }));
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000',
-    // origin: 'http://localhost:3001',
+    origin: process.env.NODE_ENV === 'production' 
+        ? process.env.ALLOWED_ORIGINS?.split(',') 
+        : 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
@@ -82,6 +112,7 @@ app.use(FooterRoute);
 
 // store.sync();
 
-app.listen(process.env.app_port, () => {
-    console.log(`Server is running on port ${process.env.app_port}`);
+const PORT = process.env.PORT || process.env.app_port || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
