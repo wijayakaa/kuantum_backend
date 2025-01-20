@@ -3,7 +3,8 @@ import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
 import db from "./config/Database.js";
-import SequelizeStore from "connect-session-sequelize";
+import pkg from "connect-session-sequelize";
+const { SequelizeStore } = pkg;
 import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
@@ -27,38 +28,29 @@ import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
 import CareerDescRoute from "./routes/CareerDescRoute.js";
 import FooterRoute from "./routes/FooterRoute.js";
 
+
 dotenv.config();
 
 const app = express();
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
 const store = new SequelizeStore({
-  db: db,
-  checkExpirationInterval: 15 * 60 * 1000, 
-  expiration: 24 * 60 * 60 * 1000,         
-});
-
+    db: db, 
+  })
 
 // (async()=>{
 //     await db.sync();
 // })();
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'fallbacksecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,  
+    saveUninitialized: true,
     store: store,
-    cookie: { 
-      secure: process.env.NODE_ENV === 'production', 
-      httpOnly: true,  
-      maxAge: 24 * 60 * 60 * 1000 
-    }
-  }));
-  
+    cookie: { secure: 'auto' }
+}));
 
 app.use(cors({
     credentials: true,
-    // origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000',
     // origin: 'http://localhost:3001',
 }));
 
@@ -90,7 +82,6 @@ app.use(FooterRoute);
 
 // store.sync();
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.app_port, () => {
+    console.log(`Server is running on port ${process.env.app_port}`);
 });
