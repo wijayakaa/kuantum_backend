@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import mysql2 from 'mysql2';
 
 const db = new Sequelize({
     host: process.env.DB_HOST,
@@ -6,7 +7,7 @@ const db = new Sequelize({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DBNAME,
     dialect: 'mysql',
-    dialectModule: require('mysql2'), 
+    dialectModule: mysql2,
     pool: {
         max: 10,
         min: 0,
