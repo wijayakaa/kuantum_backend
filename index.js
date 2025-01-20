@@ -30,24 +30,35 @@ import FooterRoute from "./routes/FooterRoute.js";
 dotenv.config();
 
 const app = express();
-const sessionStore = new SequelizeStore(session.Store);
-const store = new sessionStore({ db: db });
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const store = new SequelizeStore({
+  db: db,
+  checkExpirationInterval: 15 * 60 * 1000, 
+  expiration: 24 * 60 * 60 * 1000,         
+});
+
 
 // (async()=>{
 //     await db.sync();
 // })();
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'fallbacksecret',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,  
     store: store,
-    cookie: { secure: 'auto' }
-}));
+    cookie: { 
+      secure: process.env.NODE_ENV === 'production', 
+      httpOnly: true,  
+      maxAge: 24 * 60 * 60 * 1000 
+    }
+  }));
+  
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
     // origin: 'http://localhost:3001',
 }));
 
