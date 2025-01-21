@@ -75,13 +75,16 @@ app.use(session({
 //     // origin: 'http://localhost:3001',
 // }));
 
+// In index.js
 app.use(cors({
-    credentials: true,
-    origin: process.env.NODE_ENV === 'production' 
-        ? process.env.ALLOWED_ORIGINS?.split(',') 
-        : 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    optionsSuccessStatus: 200
+  credentials: true,
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://kuantumsolusi.com', 'http://localhost:3001']
+    : 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
