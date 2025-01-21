@@ -57,14 +57,15 @@ const sessionStore = new SequelizeStore({
 // }));
 
 app.use(session({
-    key: 'connect.sid',
+    name: 'sessionId',
     secret: process.env.SESSION_SECRET || 'your-secret-key',
     store: sessionStore,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: false,
         httpOnly: true,
+        sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
@@ -76,10 +77,12 @@ app.use(session({
 // }));
 
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
-}));
+    credentials: true,
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['set-cookie']
+  }));
 
 app.use(express.json());
 
