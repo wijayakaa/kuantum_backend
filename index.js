@@ -93,6 +93,14 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/uploads', express.static('public/uploads'));
+// In index.js, add before routes
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    message: 'Something went wrong!',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
 app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
