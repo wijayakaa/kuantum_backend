@@ -78,14 +78,18 @@ app.use(session({
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 
 app.use(express.json());
+
 app.use((req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`);
+    console.log('Request Headers:', req.headers);
+    console.log('Session Data:', req.session);
+    console.log(`${req.method} ${req.url}`);
     next();
 });
+
 app.use('/uploads', express.static('public/uploads'));
 app.use(UserRoute);
 app.use(ProductRoute);
