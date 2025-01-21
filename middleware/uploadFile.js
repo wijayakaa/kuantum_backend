@@ -2,7 +2,6 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs-extra';
 import { fileTypeFromFile } from "file-type";
-import { storage } from '../config/cloudinary.js'
 
 export const ALLOWED_MIME_TYPES = {
     'image/jpeg': true,
@@ -15,7 +14,7 @@ const baseUploadsDir = path.join(process.cwd(), 'public/uploads');
 
 const createUploadMiddleware = (subFolder) => {
     const uploadsDir = path.join(baseUploadsDir, subFolder);
-    fs.mkdirSync(uploadsDir, { recursive: true, mode: 0o755 });
+    fs.mkdirSync(uploadsDir, { recursive: true, mode: 0o755});
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -37,16 +36,11 @@ const createUploadMiddleware = (subFolder) => {
 
     return multer({
         storage: storage,
-        fileFilter: (req, file, cb) => {
-            if (!ALLOWED_MIME_TYPES[file.mimetype]) {
-                return cb(new Error('Only image files are allowed!'), false);
-            }
-            cb(null, true);
-        },
+        fileFilter: fileFilter,
         limits: {
-            fileSize: 5 * 1024 * 1024
+            fileSize: 5 * 1024 * 1024 
         }
-    });
+    })
 };
 
 export const uploadClient = createUploadMiddleware('client');
@@ -68,16 +62,10 @@ export const validateFileType = async (req, res, next) => {
     if (!req.file) {
         return res.status(400).json({ message: "No file uploaded" });
     }
-    
-    if (!ALLOWED_MIME_TYPES[req.file.mimetype]) {
-        return res.status(400).json({ message: "File type not allowed" });
-    }
-
-    next();
 
     try {
         const fileType = await fileTypeFromFile(req.file.path);
-
+        
         if (!ALLOWED_MIME_TYPES[fileType.mime]) {
             await fs.remove(req.file.path);
             return res.status(400).json({ message: "File type not allowed" });
@@ -88,9 +76,9 @@ export const validateFileType = async (req, res, next) => {
         if (req.file) {
             await fs.remove(req.file.path);
         }
-        return res.status(500).json({
+        return res.status(500).json({ 
             message: "Error validating file type",
-            error: error.message
+            error: error.message 
         });
     }
 };
