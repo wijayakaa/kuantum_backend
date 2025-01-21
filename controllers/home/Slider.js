@@ -1,6 +1,14 @@
 import Slider from "../../model/home-model/SliderModel.js";
+// import cloudinary from 'cloudinary';
+import { cloudinary } from "../../config/cloudinary.js";
 import fs from 'fs-extra';
 import path from 'path';
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET 
+  });
 
 export const getSlider = async (req, res) => {
     try {
@@ -19,9 +27,7 @@ export const getSlider = async (req, res) => {
 export const createSlider = async (req, res) => {
     try {
         const { title, desc } = req.body;
-        const imagePath = req.file
-            ? `/uploads/slider/${req.file.filename}`
-            : null;
+        const imagePath = req.file ? req.file.path : null;
 
         const slider = await Slider.create({
             title,
@@ -40,9 +46,8 @@ export const createSlider = async (req, res) => {
             }
         });
     } catch (error) {
-        if (req.file) {
-            const filePath = path.join(process.cwd(), 'public', req.file.filename);
-            fs.removeSync(filePath);
+        if (req.file?.path) {
+            await cloudinary.uploader.destroy(req.file.filename);
         }
 
         res.status(500).json({
@@ -55,7 +60,7 @@ export const createSlider = async (req, res) => {
 export const updateSlider = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title,desc } = req.body;
+        const { title, desc } = req.body;
 
         const slider = await Slider.findOne({ where: { uuid: id } });
         if (!slider) {
@@ -64,12 +69,12 @@ export const updateSlider = async (req, res) => {
 
         let imagePath = slider.image;
         if (req.file) {
+            // Delete old image from Cloudinary if exists
             if (slider.image) {
-                const oldImagePath = path.join(process.cwd(), 'public', slider.image);
-                fs.removeSync(oldImagePath);
+                const publicId = slider.image.split('/').pop().split('.')[0];
+                await cloudinary.uploader.destroy(publicId);
             }
-
-            imagePath = `/uploads/slider/${req.file.filename}`;
+            imagePath = req.file.path;
         }
 
         await slider.update({

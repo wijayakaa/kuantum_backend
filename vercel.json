@@ -5,12 +5,16 @@
             "src": "index.js",
             "use": "@vercel/node",
             "config": {
-                "includeFiles": ["config/**", "routes/**"],
+                "includeFiles": ["config/**", "routes/**", "public/**", "controllers/**", "model/**", "middleware/**"],
                 "maxDuration": 10
             }
         }
     ],
     "routes": [
+        {
+            "src": "/uploads/(.*)",
+            "dest": "/public/uploads/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "index.js",
