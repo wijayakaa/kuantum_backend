@@ -75,16 +75,13 @@ app.use(session({
 //     // origin: 'http://localhost:3001',
 // }));
 
-// In index.js
 app.use(cors({
-  credentials: true,
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://kuantumsolusi.com', 'http://localhost:3001']
-    : 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  optionsSuccessStatus: 200
+    credentials: true,
+    origin: process.env.NODE_ENV === 'production' 
+        ? process.env.ALLOWED_ORIGINS?.split(',') 
+        : 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
@@ -93,14 +90,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/uploads', express.static('public/uploads'));
-// In index.js, add before routes
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ 
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
-});
 app.use(UserRoute);
 app.use(ProductRoute);
 app.use(AuthRoute);
