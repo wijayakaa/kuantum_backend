@@ -17,6 +17,7 @@ const Users = db.define('users',{
         allowNull: false,
         validate:{
             notEmpty: true,
+            len: [3, 100]
         }
     },
     email:{

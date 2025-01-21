@@ -6,14 +6,19 @@
             "use": "@vercel/node",
             "config": {
                 "includeFiles": ["config/**", "routes/**"],
-                "nodeVersion": "18.x"
+                "maxDuration": 10
             }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "index.js"
+            "dest": "index.js",
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+                "Access-Control-Allow-Headers": "*"
+            }
         }
     ]
 }

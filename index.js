@@ -4,7 +4,7 @@ import session from "express-session";
 import dotenv from "dotenv";
 import db from "./config/Database.js";
 import sessionSequelize from "connect-session-sequelize";
-const SequelizeStore = sessionSequelize(session);
+const SequelizeStore = sessionSequelize(session.Store); 
 import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
@@ -32,29 +32,64 @@ import FooterRoute from "./routes/FooterRoute.js";
 dotenv.config();
 
 const app = express();
-const store = new SequelizeStore({
-    db: db, 
-  })
+// const store = new SequelizeStore({
+//     db: db, 
+//   })
+
+// const SequelizeStore = sessionSequelize(session.Store);
+const sessionStore = new SequelizeStore({
+    db: db,
+    tableName: 'sessions',
+    checkExpirationInterval: 15 * 60 * 1000, // Check every 15 minutes
+    expiration: 24 * 60 * 60 * 1000 // Expire after 24 hours
+});
 
 // (async()=>{
 //     await db.sync();
 // })();
 
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: store,
+//     cookie: { secure: 'auto' }
+// }));
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    key: 'connect.sid',
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
+    store: sessionStore,
     resave: false,
-    saveUninitialized: true,
-    store: store,
-    cookie: { secure: 'auto' }
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    }
 }));
 
+// app.use(cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000',
+//     // origin: 'http://localhost:3001',
+// }));
+
 app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000',
-    // origin: 'http://localhost:3001',
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log('Request Headers:', req.headers);
+    console.log('Session Data:', req.session);
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
 app.use('/uploads', express.static('public/uploads'));
 app.use(UserRoute);
 app.use(ProductRoute);
@@ -82,6 +117,7 @@ app.use(FooterRoute);
 
 // store.sync();
 
-app.listen(process.env.app_port, () => {
-    console.log(`Server is running on port ${process.env.app_port}`);
+const PORT = process.env.PORT || process.env.app_port || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
