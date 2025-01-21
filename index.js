@@ -76,12 +76,9 @@ app.use(session({
 // }));
 
 app.use(cors({
-    credentials: true,
-    origin: process.env.NODE_ENV === 'production' 
-        ? process.env.ALLOWED_ORIGINS?.split(',') 
-        : 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    optionsSuccessStatus: 200
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
