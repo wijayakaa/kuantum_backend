@@ -5,7 +5,7 @@
             "src": "index.js",
             "use": "@vercel/node",
             "config": {
-                "includeFiles": ["config/**", "routes/**", "public/**", "controllers/**", "model/**", "middleware/**"],
+                "includeFiles": ["config/**", "routes/**"],
                 "maxDuration": 10
             }
         }
