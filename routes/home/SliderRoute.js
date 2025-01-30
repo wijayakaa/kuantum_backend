@@ -1,8 +1,11 @@
 import express from "express";
+import multer from 'multer';
 import {getSlider, createSlider, updateSlider, deleteSlider} from "../../controllers/home/Slider.js";
 import { uploadSlider, validateFileType } from "../../middleware/uploadFile.js";
 import { verifyAdmin } from "../../middleware/AuthUser.js";
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get("/api/slider",getSlider );
