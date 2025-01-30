@@ -13,7 +13,7 @@ export const Login = async (req, res) => {
         if (user.role !== "admin") return res.status(403).json({ message: "Access denied. Admin only." });
 
         const match = await argon2.verify(user.password, req.body.password);
-        if (!match) return res.status(400).json({ message: "Wrong Password" });
+        if (!match) return res.status(400).json({ message: "Invalid Password" });
 
         // Set session
         req.session.userId = user.uuid;
