@@ -4,10 +4,10 @@ import { verifyAdmin } from "../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/product", getProduct);
-// router.get("/product/:id", getProductById);
-router.post("/product", verifyAdmin, createProduct);
-router.patch("/product/:id", verifyAdmin,updateProduct);
-router.delete("/product/:id", verifyAdmin, deleteProduct);
+router.get("/api/product", getProduct);
+// router.get("/api/product/:id", getProductById);
+router.post("/api/product", verifyAdmin, createProduct);
+router.patch("/api/product/:id", verifyAdmin,updateProduct);
+router.delete("/api/product/:id", verifyAdmin, deleteProduct);
 
 export default router;

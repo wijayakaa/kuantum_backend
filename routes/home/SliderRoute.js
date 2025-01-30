@@ -8,9 +8,9 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const router = express.Router();
 
-router.get("/slider",getSlider );
-router.post("/slider", verifyAdmin, uploadSlider.single("image"), validateFileType, createSlider);
-router.patch("/slider/:id", verifyAdmin, uploadSlider.single("image"), validateFileType,updateSlider )
-router.delete("/slider/:id", verifyAdmin,deleteSlider );
+router.get("/api/slider",getSlider );
+router.post("/api/slider", verifyAdmin, uploadSlider.single("image"), validateFileType, createSlider);
+router.patch("/api/slider/:id", verifyAdmin, uploadSlider.single("image"), validateFileType,updateSlider )
+router.delete("/api/slider/:id", verifyAdmin,deleteSlider );
 
 export default router;  
