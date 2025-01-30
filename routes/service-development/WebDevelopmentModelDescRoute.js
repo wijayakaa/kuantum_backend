@@ -5,8 +5,8 @@ import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/web-development-desc", getDesc);
-// router.post("/web-development-desc", verifyAdmin, uploadWebSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/web-development-desc/:id", verifyAdmin, uploadWebSliderInformation.single("image"), validateFileType, updateDesc);
+router.get("/api/web-development-desc", getDesc);
+// router.post("/api/web-development-desc", verifyAdmin, uploadWebSliderInformation.single("image"), validateFileType, createDesc);
+router.patch("/api/web-development-desc/:id", verifyAdmin, uploadWebSliderInformation.single("image"), validateFileType, updateDesc);
 
 export default router;

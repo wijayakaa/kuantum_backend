@@ -5,9 +5,9 @@ import { verifyAdmin } from "../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/experience-development-desc", getDesc);
-// router.post("/experience-development-desc", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/experience-development-desc/:id", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, updateDesc);
-// router.delete("/experience-development-desc/:id", verifyAdmin, deleteDesc);
+router.get("/api/experience-development-desc", getDesc);
+// router.post("/api/experience-development-desc", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, createDesc);
+router.patch("/api/experience-development-desc/:id", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, updateDesc);
+// router.delete("/api/experience-development-desc/:id", verifyAdmin, deleteDesc);
 
 export default router;

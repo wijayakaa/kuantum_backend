@@ -5,9 +5,9 @@ import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/clients", getClients);
-router.post("/clients", verifyAdmin, uploadClient.single("logo"), validateFileType, createClient);
-router.patch("/clients/:id", verifyAdmin, uploadClient.single("logo"), validateFileType, updateClient);
-router.delete("/clients/:id", verifyAdmin, deleteClient);
+router.get("/api/clients", getClients);
+router.post("/api/clients", verifyAdmin, uploadClient.single("logo"), validateFileType, createClient);
+router.patch("/api/clients/:id", verifyAdmin, uploadClient.single("logo"), validateFileType, updateClient);
+router.delete("/api/clients/:id", verifyAdmin, deleteClient);
 
 export default router;
