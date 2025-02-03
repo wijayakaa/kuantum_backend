@@ -35,7 +35,7 @@ export const Login = async (req, res) => {
             name: user.name,
             email: user.email,
             role: user.role,
-            sessionId: req.session.id // tambahkan ini untuk debugging
+            sessionId: req.session.id
         });
     } catch (error) {
         console.error('Login error:', error);
