@@ -30,7 +30,7 @@ export const getFooter = async (req, res) => {
     }
 };
 
-// export const createFooter = async (req, res) => {
+export const createFooter = async (req, res) => {
 //     const { location, contact, social_media } = req.body;
 //     try {
 //         // Ensure arrays and handle single items
@@ -62,7 +62,7 @@ export const getFooter = async (req, res) => {
 //     } catch (error) {
 //         res.status(500).json({ message: error.message });
 //     }
-// };
+};
 
 export const updateFooter = async (req, res) => {
     try {
@@ -108,7 +108,7 @@ export const updateFooter = async (req, res) => {
     }
 };
 
-// export const deleteFooter = async (req, res) => {
+export const deleteFooter = async (req, res) => {
 //     try {
 //         const footer = await Footer.findOne({
 //             where: { uuid: req.params.id }
@@ -126,4 +126,4 @@ export const updateFooter = async (req, res) => {
 //     } catch (error) {
 //         res.status(500).json({ message: error.message });
 //     }
-// };
+};
