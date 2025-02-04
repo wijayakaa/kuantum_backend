@@ -13,22 +13,43 @@ const Footer = db.define("footer-information", {
             notEmpty: true,
         },
     },
-    location: {
+    location : {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notEmpty: true,
+        },
+    },
+    phone: {
+        type: DataTypes.STRING, 
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: true,
         },
     },
-    contact: {
-        type: DataTypes.JSON, 
+    facebook: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: true,
         },
     },
-    social_media: {
-        type: DataTypes.JSON,
+    instagram: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
+    linkedin: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: true,
