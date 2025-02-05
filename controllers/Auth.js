@@ -1,5 +1,6 @@
 import User from "../model/UserModel.js";
 import argon2 from "argon2";
+import jwt from 'jsonwebtoken';
 
 export const Login = async (req, res) => {
     try {
@@ -15,39 +16,30 @@ export const Login = async (req, res) => {
         const match = await argon2.verify(user.password, req.body.password);
         if (!match) return res.status(400).json({ message: "Invalid Password" });
 
-        // Set session
-        req.session.userId = user.uuid;
-        
-        // Tunggu session tersimpan
-        await new Promise((resolve, reject) => {
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Session save error:', err);
-                    reject(err);
-                }
-                resolve();
-            });
-        });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user.uuid, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
 
-        // Kirim response dengan cookie
         res.status(200).json({
             uuid: user.uuid,
             name: user.name,
             email: user.email,
             role: user.role,
-            sessionId: req.session.id
+            token: token
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 };
 
 export const Logout = async (req, res) => {
-    req.session.destroy((err) => {
-        if (err) return res.status(400).json({ message: "Cannot logout" });
-        res.status(200).json({ message: "You have been logged out" });
-    });
+    // With JWT, we don't need to handle server-side logout
+    // The client should remove the token from their storage
+    res.status(200).json({ message: "Logged out successfully" });
 };
 
 export const ResetPassword = async (req, res) => {

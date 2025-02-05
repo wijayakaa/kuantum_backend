@@ -51,20 +51,20 @@ const sessionStore = new SequelizeStore({
 app.use(session({
     name: 'sessionId',
     secret: process.env.SESSION_SECRET || 'your-secret-key',
-    store: sessionStore,
+    // store: sessionStore,
     resave: true,
     saveUninitialized: true,
     cookie: {
-        secure: false,
+        secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        sameSite: 'none',
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours
-    }
+        sameSite: 'None',
+        maxAge: 24 * 60 * 60 * 1000
+    }    
 }));
 
 app.use(cors({
     credentials: true,
-    origin: true,
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     exposedHeaders: ['set-cookie']
