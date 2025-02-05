@@ -48,14 +48,6 @@ const sessionStore = new SequelizeStore({
 //     await db.sync();
 // })();
 
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     store: store,
-//     cookie: { secure: 'auto' }
-// }));
-
 app.use(session({
     name: 'sessionId',
     secret: process.env.SESSION_SECRET || 'your-secret-key',
@@ -69,12 +61,6 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
-
-// app.use(cors({
-//     credentials: true,
-//     origin: 'http://localhost:3000',
-//     // origin: 'http://localhost:3001',
-// }));
 
 app.use(cors({
     credentials: true,
@@ -118,7 +104,19 @@ app.use(ExperienceDescRoute);
 app.use(CareerDescRoute);
 app.use(FooterRoute);
 
+// export const syncDatabase = async () => {
+//     try {
+
+//         await db.sync({ 
+//             alter: true 
+//         });
+//         console.log('Database synchronized successfully');
+//     } catch (error) {
+//         console.error('Unable to sync database:', error);
+//     }
+// };
 // store.sync();
+// syncDatabase();
 
 const PORT = process.env.PORT || process.env.app_port || 80;
 app.listen(PORT, () => {
