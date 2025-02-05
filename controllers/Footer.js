@@ -12,37 +12,37 @@ export const getFooter = async (req, res) => {
 };
 
 export const createFooter = async (req, res) => {
-    const { 
-        location, 
-        phone, 
-        email, 
-        facebook, 
-        instagram, 
-        linkedin 
-    } = req.body;
+    // const { 
+    //     location, 
+    //     phone, 
+    //     email, 
+    //     facebook, 
+    //     instagram, 
+    //     linkedin 
+    // } = req.body;
 
-    try {
-        // Validate required fields are not empty
-        if (!location || !phone || !email || !facebook || !instagram || !linkedin) {
-            return res.status(400).json({
-                message: "All fields (location, phone, email, facebook, instagram, linkedin) are required"
-            });
-        }
+    // try {
+    //     // Validate required fields are not empty
+    //     if (!location || !phone || !email || !facebook || !instagram || !linkedin) {
+    //         return res.status(400).json({
+    //             message: "All fields (location, phone, email, facebook, instagram, linkedin) are required"
+    //         });
+    //     }
 
-        await Footer.create({
-            location,
-            phone,
-            email,
-            facebook,
-            instagram,
-            linkedin,
-            userId: req.userId
-        });
+    //     await Footer.create({
+    //         location,
+    //         phone,
+    //         email,
+    //         facebook,
+    //         instagram,
+    //         linkedin,
+    //         userId: req.userId
+    //     });
 
-        res.status(201).json({ message: "Footer created successfully" });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    //     res.status(201).json({ message: "Footer created successfully" });
+    // } catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 };
 
 export const updateFooter = async (req, res) => {
@@ -89,21 +89,21 @@ export const updateFooter = async (req, res) => {
 };
 
 export const deleteFooter = async (req, res) => {
-    try {
-        const footer = await Footer.findOne({
-            where: { uuid: req.params.id }
-        });
+    // try {
+    //     const footer = await Footer.findOne({
+    //         where: { uuid: req.params.id }
+    //     });
 
-        if (!footer) {
-            return res.status(404).json({ message: "Footer not found" });
-        }
+    //     if (!footer) {
+    //         return res.status(404).json({ message: "Footer not found" });
+    //     }
 
-        await Footer.destroy({
-            where: { id: footer.id }
-        });
+    //     await Footer.destroy({
+    //         where: { id: footer.id }
+    //     });
 
-        res.status(200).json({ message: "Footer deleted successfully" });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    //     res.status(200).json({ message: "Footer deleted successfully" });
+    // } catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 };
