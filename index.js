@@ -40,8 +40,8 @@ const app = express();
 const sessionStore = new SequelizeStore({
     db: db,
     tableName: 'sessions',
-    checkExpirationInterval: 15 * 60 * 1000, // Check every 15 minutes
-    expiration: 24 * 60 * 60 * 1000 // Expire after 24 hours
+    checkExpirationInterval: 15 * 60 * 1000,
+    expiration: 24 * 60 * 60 * 1000 
 });
 
 // (async()=>{
