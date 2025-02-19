@@ -10,11 +10,11 @@ export const Login = async (req, res) => {
             }
         });
 
-        if (!user) return res.status(404).json({ message: "User not found" });
+        if (!user) return res.status(404).json({ message: "You have entered an invalid credential" });
         if (user.role !== "admin") return res.status(403).json({ message: "Access denied. Admin only." });
 
         const match = await argon2.verify(user.password, req.body.password);
-        if (!match) return res.status(400).json({ message: "Invalid Password" });
+        if (!match) return res.status(400).json({ message: "You have entered an invalid credential" });
 
         // Generate JWT token
         const token = jwt.sign(
@@ -37,8 +37,6 @@ export const Login = async (req, res) => {
 };
 
 export const Logout = async (req, res) => {
-    // With JWT, we don't need to handle server-side logout
-    // The client should remove the token from their storage
     res.status(200).json({ message: "Logged out successfully" });
 };
 
@@ -54,7 +52,7 @@ export const ResetPassword = async (req, res) => {
             where: { email: email }
         });
 
-        if (!user) return res.status(404).json({ message: "User not found" });
+        if (!user) return res.status(404).json({ message: "invalid username" });
 
         const hashPassword = await argon2.hash(newPassword);
         await User.update(
