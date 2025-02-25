@@ -49,7 +49,7 @@ export const ResetPassword = async (req, res) => {
         }
 
         const user = await User.findOne({
-            where: { email: email }
+            where: { email: email },
         });
 
         if (!user) return res.status(404).json({ message: "invalid username" });
