@@ -25,6 +25,7 @@ import SiDevelopmentModelDescRoute from "./routes/service-development/SiDevelopm
 import WebAppDevelopmentModelDescRoute from "./routes/service-development/WebDevelopmentModelDescRoute.js";
 import ExperienceDescRoute from "./routes/ExperienceDescRoute.js";
 import CareerDescRoute from "./routes/CareerDescRoute.js";
+import ServiceRoute from "./routes/home/ServiceRoute.js";
 import FooterRoute from "./routes/FooterRoute.js";
 
 
@@ -43,9 +44,9 @@ const sessionStore = new SequelizeStore({
     expiration: 24 * 60 * 60 * 1000 
 });
 
-// (async()=>{
-//     await db.sync();
-// })();
+(async()=>{
+    await db.sync();
+})();
 
 app.use(session({
     name: 'sessionId',
@@ -70,7 +71,6 @@ app.use(cors({
   }));
 
 app.use(express.json());
-
 app.use((req, res, next) => {
     console.log('Request Headers:', req.headers);
     console.log('Session Data:', req.session);
@@ -95,6 +95,7 @@ app.use(SiTechnologiesRoute);
 app.use(WebTechnologiesRoute);
 app.use(ExperienceRoute);
 app.use(CareerRoute);
+app.use(ServiceRoute);
 app.use(AppDevelopmentModelDescRoute);
 app.use(SiDevelopmentModelDescRoute);
 app.use(WebAppDevelopmentModelDescRoute);
