@@ -55,9 +55,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     cookie: {
-        // secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        secure: true, // Always use secure cookies
         sameSite: 'None',
         maxAge: 24 * 60 * 60 * 1000
     }    
@@ -65,8 +64,7 @@ app.use(session({
 
 app.use(cors({
     credentials: true,
-    // origin: '*',
-    origin: ['https://kuanta-nextjs-website.vercel.app', 'http://localhost:3000', ],
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     exposedHeaders: ['set-cookie']
