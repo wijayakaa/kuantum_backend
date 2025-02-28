@@ -44,9 +44,9 @@ const sessionStore = new SequelizeStore({
     expiration: 24 * 60 * 60 * 1000 
 });
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
 app.use(session({
     name: 'sessionId',
