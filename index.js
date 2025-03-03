@@ -32,9 +32,9 @@ import FooterRoute from "./routes/FooterRoute.js";
 dotenv.config();
 
 const app = express();
-// const store = new SequelizeStore({
-//     db: db, 
-//   })
+const store = new SequelizeStore({
+    db: db, 
+  })
 
 // const SequelizeStore = sessionSequelize(session.Store);
 const sessionStore = new SequelizeStore({
@@ -44,9 +44,9 @@ const sessionStore = new SequelizeStore({
     expiration: 24 * 60 * 60 * 1000 
 });
 
-// (async()=>{
-//     await db.sync();
-// })();
+(async()=>{
+    await db.sync();
+})();
 
 app.use(session({
     name: 'sessionId',
@@ -103,18 +103,18 @@ app.use(ExperienceDescRoute);
 app.use(CareerDescRoute);
 app.use(FooterRoute);
 
-// export const syncDatabase = async () => {
-//     try {
+export const syncDatabase = async () => {
+    try {
 
-//         await db.sync({ 
-//             alter: true 
-//         });
-//         console.log('Database synchronized successfully');
-//     } catch (error) {
-//         console.error('Unable to sync database:', error);
-//     }
-// };
-// store.sync();
+        await db.sync({ 
+            alter: true 
+        });
+        console.log('Database synchronized successfully');
+    } catch (error) {
+        console.error('Unable to sync database:', error);
+    }
+};
+store.sync();
 // syncDatabase();
 
 const PORT = process.env.PORT || process.env.app_port || 80;
