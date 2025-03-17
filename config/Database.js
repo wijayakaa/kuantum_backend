@@ -14,13 +14,31 @@ const db = new Sequelize(
         dialect: "mysql",
         dialectModule: mysql2,
         pool: {
-            max: 10,
+            max: 4, // Kurangi nilai max menjadi 4 (lebih kecil dari batas 5)
             min: 0,
             acquire: 30000,
-            idle: 10000,
+            idle: 10000, // Waktu idle koneksi sebelum dilepaskan
+            evict: 5000  // Pemeriksaan koneksi idle setiap 5 detik
         },
-        logging: true,
+        logging: process.env.NODE_ENV !== 'production', // Kurangi logging di production
+        retry: {
+            max: 3 // Jumlah maksimum percobaan koneksi
+        },
+        dialectOptions: {
+            connectTimeout: 10000, // Timeout koneksi dalam ms
+            // Opsi tambahan untuk koneksi yang lebih stabil
+            dateStrings: true,
+            typeCast: true
+        }
     }
 );
+
+db.authenticate()
+    .then(() => {
+        console.log('Database connection established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 export default db;
