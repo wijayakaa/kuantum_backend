@@ -1,5 +1,6 @@
 import User from "../model/UserModel.js";
 import argon2 from "argon2";
+import jwt from 'jsonwebtoken';
 
 export const Login = async (req, res) => {
     try {
@@ -9,45 +10,34 @@ export const Login = async (req, res) => {
             }
         });
 
-        if (!user) return res.status(404).json({ message: "User not found" });
+        if (!user) return res.status(404).json({ message: "You have entered an invalid credential" });
         if (user.role !== "admin") return res.status(403).json({ message: "Access denied. Admin only." });
 
         const match = await argon2.verify(user.password, req.body.password);
-        if (!match) return res.status(400).json({ message: "Wrong Password" });
+        if (!match) return res.status(400).json({ message: "You have entered an invalid credential" });
 
-        // Set session
-        req.session.userId = user.uuid;
-        
-        // Tunggu session tersimpan
-        await new Promise((resolve, reject) => {
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Session save error:', err);
-                    reject(err);
-                }
-                resolve();
-            });
-        });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user.uuid, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
 
-        // Kirim response dengan cookie
         res.status(200).json({
             uuid: user.uuid,
             name: user.name,
             email: user.email,
             role: user.role,
-            sessionId: req.session.id // tambahkan ini untuk debugging
+            token: token
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 };
 
 export const Logout = async (req, res) => {
-    req.session.destroy((err) => {
-        if (err) return res.status(400).json({ message: "Cannot logout" });
-        res.status(200).json({ message: "You have been logged out" });
-    });
+    res.status(200).json({ message: "Logged out successfully" });
 };
 
 export const ResetPassword = async (req, res) => {
@@ -59,10 +49,10 @@ export const ResetPassword = async (req, res) => {
         }
 
         const user = await User.findOne({
-            where: { email: email }
+            where: { email: email },
         });
 
-        if (!user) return res.status(404).json({ message: "User not found" });
+        if (!user) return res.status(404).json({ message: "invalid username" });
 
         const hashPassword = await argon2.hash(newPassword);
         await User.update(

@@ -4,9 +4,9 @@ import { verifyAdmin } from "../../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get("/si-development-process", getProcess);
-router.post("/si-development-process", verifyAdmin, createProcess);
-router.patch("/si-development-process/:id", verifyAdmin,updateProcess);
-router.delete("/si-development-process/:id", verifyAdmin,deleteProcess);
+router.get("/api/si-development-process", getProcess);
+router.post("/api/si-development-process", verifyAdmin, createProcess);
+router.patch("/api/si-development-process/:id", verifyAdmin,updateProcess);
+router.delete("/api/si-development-process/:id", verifyAdmin,deleteProcess);
 
 export default router;
