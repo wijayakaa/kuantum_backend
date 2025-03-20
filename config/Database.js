@@ -14,19 +14,18 @@ const db = new Sequelize(
         dialect: "mysql",
         dialectModule: mysql2,
         pool: {
-            max: 4, // Kurangi nilai max menjadi 4 (lebih kecil dari batas 5)
+            max: 4,
             min: 0,
             acquire: 30000,
-            idle: 10000, // Waktu idle koneksi sebelum dilepaskan
-            evict: 5000  // Pemeriksaan koneksi idle setiap 5 detik
+            idle: 10000,
+            evict: 5000
         },
-        logging: process.env.NODE_ENV !== 'production', // Kurangi logging di production
+        logging: process.env.NODE_ENV !== 'production',
         retry: {
-            max: 3 // Jumlah maksimum percobaan koneksi
+            max: 3
         },
         dialectOptions: {
-            connectTimeout: 10000, // Timeout koneksi dalam ms
-            // Opsi tambahan untuk koneksi yang lebih stabil
+            connectTimeout: 10000,
             dateStrings: true,
             typeCast: true
         }

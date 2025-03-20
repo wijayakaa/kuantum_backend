@@ -54,6 +54,7 @@ export const deleteService = async (req, res) => {
 
         if (!service) return res.status(404).json({ message: "Service option not found" });
 
+        
         await Service.destroy({
             where: { id: service.id }
         });

@@ -34,7 +34,6 @@ const Service = db.define("service", {
             notEmpty: true,
         }
     },
-    //url model
     url: {
         type: DataTypes.STRING,
         allowNull: false,
