@@ -28,7 +28,6 @@ import CareerDescRoute from "./routes/CareerDescRoute.js";
 import ServiceRoute from "./routes/home/ServiceRoute.js";
 import FooterRoute from "./routes/FooterRoute.js";
 
-
 dotenv.config();
 
 const app = express();
@@ -36,7 +35,6 @@ const app = express();
 //     db: db, 
 //   })
 
-// const SequelizeStore = sessionSequelize(session.Store);
 const sessionStore = new SequelizeStore({
     db: db,
     tableName: 'sessions',
@@ -103,19 +101,7 @@ app.use(ExperienceDescRoute);
 app.use(CareerDescRoute);
 app.use(FooterRoute);
 
-// export const syncDatabase = async () => {
-//     try {
-
-//         await db.sync({ 
-//             alter: true 
-//         });
-//         console.log('Database synchronized successfully');
-//     } catch (error) {
-//         console.error('Unable to sync database:', error);
-//     }
-// };
- // // store.sync();
-// // syncDatabase();
+// store.sync();
 
 const PORT = process.env.PORT || process.env.app_port || 80;
 app.listen(PORT, () => {

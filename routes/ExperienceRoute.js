@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/api/experience", getExperience);
 router.post("/api/experience", verifyAdmin, uploadExperience.single("image"), validateFileType, createExperience);
-router.patch("/api/experience/:id", verifyAdmin, uploadExperience.single("image"), validateFileType, updateExperience);
+router.put("/api/experience/:id", verifyAdmin, uploadExperience.single("image"), validateFileType, updateExperience);
 router.delete("/api/experience/:id", verifyAdmin, deleteExperience);
 
 export default router;

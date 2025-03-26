@@ -19,6 +19,14 @@ export const getExperience = async (req, res) => {
 export const createExperience = async (req, res) => {
     try {
         const { title, desc } = req.body;
+
+        // Validasi panjang deskripsi
+        if (desc.length > 500) {
+            return res.status(400).json({
+                message: "Deskripsi tidak boleh lebih dari 500 karakter"
+            });
+        }
+
         const imagePath = req.file
             ? `/uploads/experience/${req.file.filename}`
             : null;
@@ -55,7 +63,14 @@ export const createExperience = async (req, res) => {
 export const updateExperience = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title,desc } = req.body;
+        const { title, desc } = req.body;
+
+        // Validasi panjang deskripsi
+        if (desc && desc.length > 500) {
+            return res.status(400).json({
+                message: "Deskripsi tidak boleh lebih dari 500 karakter"
+            });
+        }
 
         const experience = await Experience.findOne({ where: { uuid: id } });
         if (!experience) {
@@ -81,7 +96,7 @@ export const updateExperience = async (req, res) => {
         res.status(200).json({
             message: "Experience updated successfully",
             experience: {
-                image: experience.loimagego,
+                image: experience.image,
                 id: experience.uuid,
                 title: experience.title,
                 desc: experience.desc,

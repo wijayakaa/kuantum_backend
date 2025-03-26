@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get("/api/si-development-desc", getDesc);
 // router.post("/api/si-development-desc", verifyAdmin, uploadSiSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/api/si-development-desc/:id", verifyAdmin, uploadSiSliderInformation.single("image"), validateFileType, updateDesc);
+router.put("/api/si-development-desc/:id", verifyAdmin, 
+    uploadSiSliderInformation.single("image"), validateFileType, 
+     updateDesc);
 
 export default router;

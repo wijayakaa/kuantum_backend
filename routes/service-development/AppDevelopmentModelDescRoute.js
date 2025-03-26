@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.get("/api/app-development-desc", getDesc);
 // router.post("/api/app-development-desc", verifyAdmin, uploadAppSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/api/app-development-desc/:id", verifyAdmin, uploadAppSliderInformation.single("image"), validateFileType, updateDesc);
+router.put("/api/app-development-desc/:id", verifyAdmin, 
+    uploadAppSliderInformation.single("image"), validateFileType, 
+    updateDesc);
 // router.delete("/api/app-development-desc/:id", verifyAdmin, deleteDesc);
 
 export default router;
