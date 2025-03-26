@@ -43,21 +43,6 @@ const createUploadMiddleware = (subFolder) => {
     })
 };
 
-export const uploadClient = createUploadMiddleware('client');
-export const uploadSlider = createUploadMiddleware('slider');
-export const uploadWebTechnologies = createUploadMiddleware('web-technologies');
-export const uploadSiTechnologies = createUploadMiddleware('si-technologies');
-export const uploadAppTechnologies = createUploadMiddleware('app-technologies');
-export const uploadExperience = createUploadMiddleware('experience');
-
-//information slide
-export const uploadAppSliderInformation = createUploadMiddleware('app-slider-information');
-export const uploadWebSliderInformation = createUploadMiddleware('web-slider-information');
-export const uploadSiSliderInformation = createUploadMiddleware('si-slider-information');
-export const uploadExperienceSliderInformation = createUploadMiddleware('experience-slider-information');
-export const uploadCareerSliderInformation = createUploadMiddleware('career-slider-information');
-
-
 export const validateFileType = async (req, res, next) => {
     if (!req.file) {
         return res.status(400).json({ message: "No file uploaded" });
@@ -82,3 +67,15 @@ export const validateFileType = async (req, res, next) => {
         });
     }
 };
+
+export const uploadClient = createUploadMiddleware('client');
+export const uploadSlider = createUploadMiddleware('slider');
+export const uploadWebTechnologies = createUploadMiddleware('web-technologies');
+export const uploadSiTechnologies = createUploadMiddleware('si-technologies');
+export const uploadAppTechnologies = createUploadMiddleware('app-technologies');
+export const uploadExperience = createUploadMiddleware('experience');
+export const uploadAppSliderInformation = createUploadMiddleware('app-slider-information');
+export const uploadWebSliderInformation = createUploadMiddleware('web-slider-information');
+export const uploadSiSliderInformation = createUploadMiddleware('si-slider-information');
+export const uploadExperienceSliderInformation = createUploadMiddleware('experience-slider-information');
+export const uploadCareerSliderInformation = createUploadMiddleware('career-slider-information');

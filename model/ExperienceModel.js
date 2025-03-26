@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import User from "./UserModel.js";
-
 const { DataTypes } = Sequelize;
 
 const Experience = db.define("experience", {
@@ -21,10 +20,15 @@ const Experience = db.define("experience", {
         },
     },
     desc: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT('medium'),
         allowNull: false,
         validate: {
             notEmpty: true,
+            checkLength(value) {
+                if (value.length > 500) {
+                    throw new Error('Deskripsi tidak boleh lebih dari 500 karakter');
+                }
+            }
         },
     },
     image: {

@@ -117,7 +117,6 @@ export const updateDesc = async (req, res) => {
         const { title } = req.body;
         let desc;
 
-        // Handle different formats of description data
         try {
             if (typeof req.body.desc === 'string') {
                 desc = JSON.parse(req.body.desc);
@@ -128,7 +127,7 @@ export const updateDesc = async (req, res) => {
                     ? req.body['desc[]'] 
                     : [req.body['desc[]']];
             } else {
-                desc = JSON.parse(description.desc); // Keep existing description if not provided
+                desc = JSON.parse(description.desc); 
             }
 
             if (desc && (!Array.isArray(desc) || desc.some(item => typeof item !== 'string' || item.trim().length === 0))) {
