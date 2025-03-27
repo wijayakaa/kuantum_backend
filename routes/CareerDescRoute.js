@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/api/career-slider-desc", getDesc);
 // router.post("/api/career-slider-desc", verifyAdmin, uploadCareerSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/api/career-slider-desc/:id", verifyAdmin, uploadCareerSliderInformation.single("image"), validateFileType, updateDesc);
+router.patch("/api/career-slider-desc/:id", verifyAdmin, uploadCareerSliderInformation.single("image"), updateDesc);
 // router.delete("/api/career-slider-desc/:id", verifyAdmin, deleteDesc);
 
 export default router;

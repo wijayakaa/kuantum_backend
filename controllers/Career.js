@@ -1,22 +1,8 @@
 import Career from "../model/CareerModel.js";
-import fs from 'fs-extra';
-import path from 'path';
 
 export const getCareer = async (req, res) => {
     try {
-        const career = await Career.findAll({
-            attributes: [
-                'uuid', 
-                'name', 
-                'posted_at', 
-                'message', 
-                'city', 
-                'type', 
-                'work_at', 
-                'icon', 
-                'list_messages'
-            ]
-        });
+        const career = await Career.findAll({ attributes: ['uuid', 'name', 'posted_at', 'message', 'city', 'type', 'work_at', 'icon', 'list_messages'] });
         res.status(200).json(career);
     } catch (error) {
         res.status(500).json({
@@ -28,25 +14,15 @@ export const getCareer = async (req, res) => {
 
 export const createCareer = async (req, res) => {
     try {
-        const { name,posted_at, message, city, type, work_at , list_messages,icon} = req.body;
-        const career = await Career.create({
-            name,
-            posted_at,
-            message,
-            city,
-            type,
-            work_at,
-            list_messages,
-            icon,
-            userId: req.userId
-        });
+        const { name, posted_at, message, city, type, work_at, list_messages, icon } = req.body;
+        const career = await Career.create({ name, posted_at, message, city, type, work_at, list_messages, icon, userId: req.userId });
 
         res.status(201).json({
             message: "Career created successfully",
             career: {
                 uuid: career.uuid,
                 name: career.name,
-                posted_at: career.posted_at, 
+                posted_at: career.posted_at,
                 message: career.message,
                 city: career.city,
                 type: career.type,
@@ -56,7 +32,7 @@ export const createCareer = async (req, res) => {
             }
         });
     } catch (error) {
-        
+
         res.status(500).json({
             message: "Error creating career",
             error: error.message
@@ -67,7 +43,7 @@ export const createCareer = async (req, res) => {
 export const updateCareer = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, message, city, type, work_at , list_messages,icon } = req.body;
+        const { name, message, city, type, work_at, list_messages, icon } = req.body;
 
         const career = await Career.findOne({ where: { uuid: id } });
         if (!career) {
