@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/api/experience-development-desc", getDesc);
 // router.post("/api/experience-development-desc", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, createDesc);
-router.patch("/api/experience-development-desc/:id", verifyAdmin, uploadExperienceSliderInformation.single("image"), validateFileType, updateDesc);
+router.patch("/api/experience-development-desc/:id", verifyAdmin, uploadExperienceSliderInformation.single("image"), updateDesc);
 // router.delete("/api/experience-development-desc/:id", verifyAdmin, deleteDesc);
 
 export default router;

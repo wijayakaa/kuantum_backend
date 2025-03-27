@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/api/app-technologies", getTechnologies);
 router.post("/api/app-technologies", verifyAdmin, uploadAppTechnologies.single("logo"), validateFileType, createTechnologies);
-router.patch("/api/app-technologies/:id", verifyAdmin, uploadAppTechnologies.single("logo"), validateFileType, updateTechnologies);
+router.patch("/api/app-technologies/:id", verifyAdmin, uploadAppTechnologies.single("logo"), updateTechnologies);
 router.delete("/api/app-technologies/:id", verifyAdmin, deleteTechnologies);
 
 export default router;

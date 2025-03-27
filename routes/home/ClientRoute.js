@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/api/clients", getClients);
 router.post("/api/clients", verifyAdmin, uploadClient.single("logo"), validateFileType, createClient);
-router.patch("/api/clients/:id", verifyAdmin, uploadClient.single("logo"), validateFileType, updateClient);
+router.put("/api/clients/:id", verifyAdmin, uploadClient.single("logo"), updateClient);
 router.delete("/api/clients/:id", verifyAdmin, deleteClient);
 
 export default router;
